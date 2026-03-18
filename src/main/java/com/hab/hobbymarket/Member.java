@@ -1,4 +1,4 @@
-package com.hab.hobbymarket.domain;
+package com.hab.hobbymarket;
 
 import java.time.LocalDateTime;
 
