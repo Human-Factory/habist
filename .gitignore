@@ -40,3 +40,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### DB 설정 (개인 정보 포함) ###
+src/main/java/com/hab/global/config/DBConnection.java
