@@ -1,4 +1,4 @@
-package com.hobbymarket.domain;
+package com.hab.global.utils;
 
 import java.util.Scanner;
 
