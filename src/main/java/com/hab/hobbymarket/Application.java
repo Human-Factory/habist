@@ -8,6 +8,7 @@ public class Application {
         while (true) {
 
             Register rgst = new Register();
+            Login login = new Login();
 
             Scanner sc = new Scanner(System.in);
             System.out.println("안녕하세요 하비스입니다.");
@@ -25,7 +26,7 @@ public class Application {
                     String pwd = sc.nextLine();
 
 
-                    if (logIn(id,pwd) = false) {
+                    if (login.login(id,pwd) = false) {
                         System.out.println("아이디와 비밀번호를 확인해주십시오");
                         return;
                     } else {
