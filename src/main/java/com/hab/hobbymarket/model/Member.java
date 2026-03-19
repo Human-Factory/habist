@@ -68,21 +68,4 @@ public class Member {
     public void setMemberId(Long memberId) { this.memberId = memberId; }
     public void setEmail(String email)     { this.email = email; }
     public void setPhone(String phone)     { this.phone = phone; }
-
-    // -----------------------------------------------
-    // DB 조회용 생성자
-    // -----------------------------------------------
-    public Member(Long memberId, String loginId, String password, String nickname,
-                  String name, String email, String phone, String role, String status) {
-        this.memberId = memberId;
-        this.loginId = loginId;
-        this.password = password;
-        this.nickname = nickname;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.role = role;
-        this.status = status;
-    }
 }
-
