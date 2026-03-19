@@ -1,9 +1,10 @@
 package com.hab.hobbymarket.dao;
 
-import com.hab.hobbymarket.model.Member;
 import com.hab.hobbymarket.global.config.DBConnection;
+import com.hab.hobbymarket.model.Member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +36,37 @@ public class MemberDAOImpl implements MemberDAO {
         memberList.add(member);
     }
 
+    // 로그인용 회원 조회
+    @Override
+    public Member findByLoginId(String loginId) {
+        String sql = """
+                SELECT member_id, login_id, password, nickname, name, email, phone, role, status, created_at, updated_at
+                FROM members
+                WHERE login_id = ?
+                """;
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, loginId);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return new Member(
+                            rs.getString("login_id"),
+                            rs.getString("password"),
+                            rs.getString("nickname"),
+                            rs.getString("name")
+                    );
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("회원 조회 실패: " + e.getMessage());
+        }
+        return null;
+    }
+
     // 회원 탈퇴 (INACTIVE 처리)
+    @Override
     public int deactivateMember(int memberId) {
         int result = 0;
         Connection conn = null;
