@@ -2,17 +2,17 @@ package com.hab.hobbymarket.model;
 
 import java.security.Timestamp;
 
-public class Subscription {
+public class Wishlist {
 
-    // Subscription 변수 생성
+    // wishlist 변수 생성
     private int subscriptionId;
     private int memberId;
     private int instructorId;
-    private Timestamp createdAt; // 날짜/ 시간 컬럼 생성
+    private Timestamp createdAt; // 날짜/ 시간 컬럼 Timestamp 사용
 
 
-    // Subscription의 생성자, getter 및 setter, toString() 생성
-    public Subscription(int subscriptionId, int memberId, int instructorId, Timestamp createdAt) {
+    // wishlist의 생성자, getter 및 setter, toString() 생성
+    public Wishlist(int subscriptionId, int memberId, int instructorId, Timestamp createdAt) {
         this.subscriptionId = subscriptionId;
         this.memberId = memberId;
         this.instructorId = instructorId;
@@ -53,7 +53,7 @@ public class Subscription {
 
     @Override
     public String toString() {
-        return "Subscription{" +
+        return "Wishlist{" +
                 "subscriptionId=" + subscriptionId +
                 ", memberId=" + memberId +
                 ", instructorId=" + instructorId +
