@@ -19,6 +19,7 @@ public class MemberInputView {
         System.out.print("아이디 입력: ");
         String loginId = scanner.nextLine();
 
+
         System.out.print("비밀번호 입력: ");
         String password = scanner.nextLine();
 
