@@ -1,4 +1,4 @@
 package com.hab.hobbymarket.dao;
 
-public class WhshlistDAO {
+public class WishlistDAO {
 }
