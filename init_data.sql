@@ -33,3 +33,43 @@ VALUES
     (3, 2, 'UI/UX 디자인 기초', '디자인 기본'),
     (3, 3, '홈트레이닝 입문', '운동 입문'),
     (3, 3, '기초 스트레칭', '스트레칭 기초');
+
+select * from wishlists;
+
+INSERT INTO wishlists (member_id, lecture_id) VALUES
+(1, 1),
+(1, 2),
+(2, 3);
+
+
+INSERT INTO subscriptions (member_id, instructor_id) VALUES
+                                                         (1, 3),
+                                                         (2, 3);
+
+INSERT INTO enrollments (member_id, lecture_id, progress_percent, last_position) VALUES
+                                                                                     (1, 1, 30, 'SECTION-1'),
+                                                                                     (1, 2, 70, 'SECTION-3'),
+                                                                                     (2, 3, 100, 'SECTION-5');
+
+
+SELECT
+    w.wishlist_id,
+    w.member_id,
+    l.lecture_id,
+    l.title,
+    w.created_at
+FROM wishlists w
+         JOIN lectures l ON w.lecture_id = l.lecture_id
+WHERE w.member_id = 1;
+
+SELECT
+    e.enrollment_id,
+    e.member_id,
+    l.title,
+    e.progress_percent,
+    e.last_position,
+    e.enrolled_at
+FROM enrollments e
+         JOIN lectures l ON e.lecture_id = l.lecture_id
+WHERE e.member_id = 1;
+
