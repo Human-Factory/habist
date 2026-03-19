@@ -1,30 +1,30 @@
 package com.hab.hobbymarket.model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class Wishlist {
 
-    // wishlist 변수 생성
-    private int subscriptionId;
+    private int wishlistId;
     private int memberId;
-    private int instructorId;
-    private Timestamp createdAt; // 날짜/ 시간 컬럼 Timestamp 사용
+    private int lectureId;
+    private Timestamp createdAt;
 
+    public Wishlist() {
+    }
 
-    // wishlist의 생성자, getter 및 setter, toString() 생성
-    public Wishlist(int subscriptionId, int memberId, int instructorId, Timestamp createdAt) {
-        this.subscriptionId = subscriptionId;
+    public Wishlist(int wishlistId, int memberId, int lectureId, Timestamp createdAt) {
+        this.wishlistId = wishlistId;
         this.memberId = memberId;
-        this.instructorId = instructorId;
+        this.lectureId = lectureId;
         this.createdAt = createdAt;
     }
 
-    public int getSubscriptionId() {
-        return subscriptionId;
+    public int getWishlistId() {
+        return wishlistId;
     }
 
-    public void setSubscriptionId(int subscriptionId) {
-        this.subscriptionId = subscriptionId;
+    public void setWishlistId(int wishlistId) {
+        this.wishlistId = wishlistId;
     }
 
     public int getMemberId() {
@@ -35,12 +35,12 @@ public class Wishlist {
         this.memberId = memberId;
     }
 
-    public int getInstructorId() {
-        return instructorId;
+    public int getLectureId() {
+        return lectureId;
     }
 
-    public void setInstructorId(int instructorId) {
-        this.instructorId = instructorId;
+    public void setLectureId(int lectureId) {
+        this.lectureId = lectureId;
     }
 
     public Timestamp getCreatedAt() {
@@ -54,9 +54,9 @@ public class Wishlist {
     @Override
     public String toString() {
         return "Wishlist{" +
-                "subscriptionId=" + subscriptionId +
+                "wishlistId=" + wishlistId +
                 ", memberId=" + memberId +
-                ", instructorId=" + instructorId +
+                ", lectureId=" + lectureId +
                 ", createdAt=" + createdAt +
                 '}';
     }
