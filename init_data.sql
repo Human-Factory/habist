@@ -74,5 +74,10 @@ FROM enrollments e
 WHERE e.member_id = 1;
 
 
+-- lectures를 join해서 조회하기
+SELECT wishlist_id, member_id, lecture_id, created_at
+FROM wishlists
+WHERE member_id = ?
+ORDER BY created_at DESC;
 
 -- WHERE member_id = ? AND status = 'ACTIVE';

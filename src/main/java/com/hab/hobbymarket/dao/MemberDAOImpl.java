@@ -1,6 +1,6 @@
 package com.hab.hobbymarket.dao;
 
-import com.hab.hobbymarket.global.config.DBConnection;
+import com.hab.global.config.DBConnection;
 import com.hab.hobbymarket.model.Member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -64,6 +64,10 @@ public class MemberDAOImpl implements MemberDAO {
         }
         return null;
     }
+
+
+    // =====================================================================================
+
 
     // 회원 탈퇴 (INACTIVE 처리)
     @Override
