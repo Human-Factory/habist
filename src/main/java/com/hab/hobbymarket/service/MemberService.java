@@ -27,7 +27,7 @@ public class MemberService {
 
         // 2. 비밀번호 형식 검증
         String password = request.getPassword();
-        if (password.length() < 8) {
+        if (password.length() <= 8) {
             System.out.println("비밀번호는 8자 이상이여야 합니다.");
             return;
         }
