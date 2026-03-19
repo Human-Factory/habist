@@ -7,13 +7,13 @@ import com.hab.hobbymarket.view.memberview.MemberOutputView;
 
 public class MemberController {
 
-    private MemberService memberService = new MemberService();
-    private MemberInputView memberInputView = new MemberInputView();
-    private MemberOutputView memberOutputView = new MemberOutputView();
-    private MemberService memberService;
+    private final MemberService memberService;
+    private final MemberInputView memberInputView;
+    private final MemberOutputView memberOutputView = new MemberOutputView();
 
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
+        this.memberInputView = new MemberInputView(this);
     }
     
     public void signUp() {
