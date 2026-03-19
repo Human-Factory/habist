@@ -1,12 +1,7 @@
 package com.hab.hobbymarket;
 
-<<<<<<< HEAD
-import com.hab.hobbymarket.controller.WishlistController;
-import com.hab.hobbymarket.model.Wishlist;
-
-import java.util.List;
-=======
 import com.hab.global.config.DBConnection;
+import com.hab.hobbymarket.controller.ContentController;
 import com.hab.hobbymarket.controller.EnrollmentController;
 import com.hab.hobbymarket.controller.MemberController;
 import com.hab.hobbymarket.controller.SubscriptionController;
@@ -23,36 +18,16 @@ import com.hab.hobbymarket.view.subscriptionview.SubscriptionInputView;
 import com.hab.hobbymarket.view.wishlistview.WishlistInputView;
 
 import java.sql.Connection;
->>>>>>> ea1729a79b358d43cc1ab27c8bf2d6c7cb03e929
 
 public class Application {
 
     public static void main(String[] args) {
 
-<<<<<<< HEAD
-        // Controller 생성
-        WishlistController controller = new WishlistController();
-
-        // 테스트용 memberId (DB에 있는 값)
-        int memberId = 1;
-
-        // 관심목록 조회
-        List<Wishlist> list = controller.findByMemberId(memberId);
-
-        // 출력
-        if (list.isEmpty()) {
-            System.out.println("관심목록이 없습니다.");
-        } else {
-            for (Wishlist w : list) {
-                System.out.println(w);
-            }
-=======
         // 1. DB 연결
         Connection con = DBConnection.getConnection();
         if (con == null) {
             System.out.println("🚨 프로그램을 종료합니다.");
             return;
->>>>>>> ea1729a79b358d43cc1ab27c8bf2d6c7cb03e929
         }
         System.out.println("✅ DB 연결 성공!");
 
@@ -60,10 +35,6 @@ public class Application {
         MemberService memberService = new MemberService();
         MemberController memberController = new MemberController(memberService);
         MemberInputView memberInputView = new MemberInputView(memberController);
-        // ============================================
-
-        // 3. Login 조립 ==============================
-        LoginView loginView = new LoginView();
         // ============================================
 
         // 3. Enrollment 조립 =========================
@@ -85,11 +56,13 @@ public class Application {
         // ============================================
 
         // 6. MainMenu 조립 (항상 가장 마지막!)
+        LoginView loginView = new LoginView();
         MainMenuInputView mainMenuInputView = new MainMenuInputView(
                 memberInputView,
                 enrollmentInputView,
                 subscriptionInputView,
-                wishlistInputView
+                wishlistInputView,
+                loginView
         );
 
         // 7. 첫 화면 호출

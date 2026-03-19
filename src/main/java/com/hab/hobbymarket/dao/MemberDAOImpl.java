@@ -80,10 +80,6 @@ public class MemberDAOImpl implements MemberDAO {
         return null;
     }
 
-
-    // =====================================================================================
-
-
     // 회원 탈퇴 (INACTIVE 처리)
     @Override
     public int deactivateMember(int memberId) {

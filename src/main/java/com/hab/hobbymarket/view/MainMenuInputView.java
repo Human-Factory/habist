@@ -12,18 +12,46 @@ public class MainMenuInputView {
     private EnrollmentInputView enrollmentInputView;
     private SubscriptionInputView subscriptionInputView;
     private WishlistInputView wishlistInputView;
+    private LoginView loginView;
     private Scanner sc = new Scanner(System.in);
 
     public MainMenuInputView(MemberInputView memberInputView,
                              EnrollmentInputView enrollmentInputView,
                              SubscriptionInputView subscriptionInputView,
-                             WishlistInputView wishlistInputView) {
+                             WishlistInputView wishlistInputView,
+                             LoginView loginView) {
         this.memberInputView = memberInputView;
         this.enrollmentInputView = enrollmentInputView;
         this.subscriptionInputView = subscriptionInputView;
         this.wishlistInputView = wishlistInputView;
+        this.loginView = loginView;
     }
 
     public void displayMainMenu() {
+        while (true) {
+            System.out.println("\n===========================");
+            System.out.println("    🎯 하비스에 오신걸 환영합니다!");
+            System.out.println("===========================");
+            System.out.println("1. 로그인");
+            System.out.println("2. 회원가입");
+            System.out.println("0. 종료");
+            System.out.println("===========================");
+            System.out.print("메뉴를 선택해주세요 : ");
+
+            String no = sc.nextLine().trim();
+
+            switch (no) {
+                case "1" -> loginView.login();
+                case "2" -> {
+                    memberInputView.getSignUpInput();
+                    loginView.login();
+                }
+                case "0" -> {
+                    System.out.println("프로그램을 종료합니다.");
+                    return;
+                }
+                default -> System.out.println("🚨 올바른 번호를 입력해주세요.");
+            }
+        }
     }
 }
