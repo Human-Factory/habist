@@ -7,6 +7,7 @@ public class MemberInputView {
 
     private Scanner scanner = new Scanner(System.in);
 
+    // 회원가입 입력
     public MemberSignUpRequest getSignUpInput() {
 
         System.out.print("아이디 입력: ");
@@ -28,5 +29,12 @@ public class MemberInputView {
         String phone = scanner.nextLine();
 
         return new MemberSignUpRequest(loginId, password, email, nickname, name, phone);
+    }
+
+    // 회원 탈퇴용 ID 입력
+    public static int inputMemberId() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("탈퇴할 회원 ID 입력: ");
+        return sc.nextInt();
     }
 }
