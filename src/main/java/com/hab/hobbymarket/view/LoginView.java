@@ -10,7 +10,11 @@ import java.util.Scanner;
 public class LoginView {
 
     private final LoginController loginController = new LoginController();
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner sc;
+
+    public LoginView(Scanner sc) {
+        this.sc = sc;
+    }
 
     public void login() {
 
@@ -43,5 +47,6 @@ public class LoginView {
 
     public void logout() {
         loginController.logout();
+        System.out.println("로그아웃 되었습니다.");
     }
 }
