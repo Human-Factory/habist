@@ -4,10 +4,12 @@ import com.hab.hobbymarket.dao.MemberDAO;
 import com.hab.hobbymarket.dao.MemberDAOImpl;
 import com.hab.hobbymarket.model.Member;
 import com.hab.hobbymarket.model.MemberSignUpRequest;
+import java.sql.Connection;
 
 public class MemberService {
 
     private MemberDAO memberDAO = new MemberDAOImpl();
+    private Connection con;
 
     // 회원가입
     public void signUp(MemberSignUpRequest request) {
@@ -61,5 +63,7 @@ public class MemberService {
     public boolean deactivateMember(int memberId) {
         int result = ((MemberDAOImpl) memberDAO).deactivateMember(memberId);
         return result > 0;
+    public MemberService(Connection con) {
+        this.con = con;
     }
 }
