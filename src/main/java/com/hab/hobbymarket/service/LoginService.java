@@ -1,6 +1,9 @@
 package com.hab.hobbymarket.service;
 
-import com.hab.hobbymarket.dao.*;
+import com.hab.hobbymarket.dao.LoginAttemptDAO;
+import com.hab.hobbymarket.dao.LoginAttemptDAOImpl;
+import com.hab.hobbymarket.dao.MemberDAO;
+import com.hab.hobbymarket.dao.MemberDAOImpl;
 import com.hab.hobbymarket.model.LoginAttempt;
 import com.hab.hobbymarket.model.Member;
 import com.hab.hobbymarket.session.SessionManager;
@@ -13,7 +16,7 @@ public class LoginService {
     private final LoginAttemptDAO attemptDAO = new LoginAttemptDAOImpl();
 
     // 로그인 처리
-    public boolean login(String id, String pwd) {
+    public LoginResult login(String id, String pwd) {
 
         // 1. 로그인 시도 정보 조회
         LoginAttempt attempt = attemptDAO.findByLoginId(id);
@@ -27,15 +30,13 @@ public class LoginService {
         // 3. 잠금 상태 확인
         if (attempt.getLockedUntil() != null &&
                 attempt.getLockedUntil().isAfter(LocalDateTime.now())) {
-
-            System.out.println("계정이 잠겨 있습니다. 잠시 후 다시 시도하세요.");
-            return false;
+            return LoginResult.LOCKED;
         }
 
         // 4. 회원 조회
         Member member = memberDAO.findByLoginId(id);
 
-        // 5. 로그인 실패 (아이디 없음 or 비번 틀림)
+        // 5. 아이디 없음 또는 비밀번호 틀림
         if (member == null || !member.getPassword().equals(pwd)) {
 
             int newCount = attempt.getAttemptCount() + 1;
@@ -43,30 +44,25 @@ public class LoginService {
             // 실패 횟수 증가
             attemptDAO.increaseAttemptCount(id, newCount);
 
-            // 5회 초과 시 잠금 (10분)
+            // 5회 이상이면 10분 잠금
             if (newCount >= 5) {
                 LocalDateTime lockTime = LocalDateTime.now().plusMinutes(10);
                 attemptDAO.updateLock(id, lockTime.toString());
-
-                System.out.println("로그인 5회 실패로 계정이 10분간 잠깁니다.");
-            } else {
-                System.out.println("아이디 또는 비밀번호가 잘못되었습니다.");
+                return LoginResult.LOCKED;
             }
 
-            return false;
+            return LoginResult.INVALID_CREDENTIAL;
         }
 
         // 6. 계정 상태 확인
-        if (!member.getStatus().equals(Member.STATUS_ACTIVE)) {
-            System.out.println("비활성화된 계정입니다.");
-            return false;
+        if (!Member.STATUS_ACTIVE.equals(member.getStatus())) {
+            return LoginResult.INACTIVE;
         }
 
-        // 7. 로그인 성공 → 초기화 + 세션 저장
+        // 7. 로그인 성공 → 시도 초기화 + 세션 저장
         attemptDAO.reset(id);
         SessionManager.setCurrentUser(member);
 
-        System.out.println("로그인 성공");
-        return true;
+        return LoginResult.SUCCESS;
     }
 }
