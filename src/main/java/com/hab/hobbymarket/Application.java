@@ -1,5 +1,6 @@
 package com.hab.hobbymarket;
 
+import com.hab.global.config.DBConnection;
 import com.hab.hobbymarket.controller.ContentController;
 import com.hab.hobbymarket.controller.EnrollmentController;
 import com.hab.hobbymarket.controller.MemberController;
