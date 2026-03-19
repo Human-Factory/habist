@@ -2,15 +2,19 @@ package com.hab.hobbymarket.model;
 
 import java.security.Timestamp;
 
-public class Enrollemnt {
+public class Enrollement {
+
+    // Enrollment 변수 생성
     private int enrollmentId;
     private int memberId;
     private int lectureId;
     private int progressPercent;
     private String lastPosition;
-    private Timestamp enrolledAt;
+    private Timestamp enrolledAt; // 날짜 / 시간 컬럼 생성
 
-    public Enrollemnt(int enrollmentId, int memberId, int lectureId, int progressPercent, String lastPosition, Timestamp enrolledAt) {
+
+    // Enrollment의 생성자, getter 및 setter, toString() 생성
+    public Enrollement(int enrollmentId, int memberId, int lectureId, int progressPercent, String lastPosition, Timestamp enrolledAt) {
         this.enrollmentId = enrollmentId;
         this.memberId = memberId;
         this.lectureId = lectureId;

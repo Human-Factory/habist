@@ -3,11 +3,15 @@ package com.hab.hobbymarket.model;
 import java.security.Timestamp;
 
 public class Wishlist {
+
+    // wishlist 변수 생성
     private int subscriptionId;
     private int memberId;
     private int instructorId;
-    private Timestamp createdAt;
+    private Timestamp createdAt; // 날짜/ 시간 컬럼 Timestamp 사용
 
+
+    // wishlist의 생성자, getter 및 setter, toString() 생성
     public Wishlist(int subscriptionId, int memberId, int instructorId, Timestamp createdAt) {
         this.subscriptionId = subscriptionId;
         this.memberId = memberId;
