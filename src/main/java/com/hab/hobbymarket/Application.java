@@ -1,33 +1,41 @@
 package com.hab.hobbymarket;
 
+import com.hab.hobbymarket.controller.MemberController;
 import com.hab.hobbymarket.view.LoginView;
-
 import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        MemberController memberController = new MemberController();
         LoginView loginView = new LoginView();
 
         while (true) {
-
-            System.out.println("===== HABIS =====");
-            System.out.println("1. 로그인");
-            System.out.println("2. 종료");
+            System.out.println("\n===== HABIS 메뉴 =====");
+            System.out.println("1. 회원가입");
+            System.out.println("2. 회원 탈퇴");
+            System.out.println("3. 로그인");
+            System.out.println("0. 종료");
             System.out.print("선택: ");
 
-            String input = sc.nextLine();
+            int menu = sc.nextInt();
 
-            if ("1".equals(input)) {
-                loginView.login();   // 👉 여기 핵심
-            }
-            else if ("2".equals(input)) {
-                System.out.println("프로그램 종료");
-                break;
-            }
-            else {
-                System.out.println("잘못된 입력입니다.");
+            switch (menu) {
+                case 1:
+                    memberController.signUp();
+                    break;
+                case 2:
+                    memberController.deactivateMember();
+                    break;
+                case 3:
+                    loginView.login();
+                    break;
+                case 0:
+                    System.out.println("프로그램 종료");
+                    return;
+                default:
+                    System.out.println("잘못된 입력입니다.");
             }
         }
     }

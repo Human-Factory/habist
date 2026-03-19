@@ -1,66 +1,88 @@
 package com.hab.hobbymarket.dao;
 
-import com.hab.global.config.DBConnection;
+import com.hab.hobbymarket.global.config.DBConnection;
 import com.hab.hobbymarket.model.Member;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MemberDAOImpl implements MemberDAO {
 
+    // 더미 데이터 저장소 (DB 대신 메모리에서 관리)
+    private static List<Member> memberList = new ArrayList<>();
+
+    // 테스트용 더미 데이터
+    static {
+        memberList.add(new Member("testUser1", "Test1234!", "테스터", "홍길동"));
+        memberList.add(new Member("admin123", "Admin1234!", "관리자", "김관리"));
+    }
+
+    // 아이디 중복 체크
+    @Override
+    public boolean existsByLoginId(String loginId) {
+        for (Member member : memberList) {
+            if (member.getLoginId().equals(loginId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // 회원 저장
+    @Override
+    public void save(Member member) {
+        memberList.add(member);
+    }
+
+    // 로그인용 회원 조회
     @Override
     public Member findByLoginId(String loginId) {
-
-        // 로그인 시 아이디로 회원 1명을 조회하는 SQL
         String sql = """
                 SELECT member_id, login_id, password, nickname, name, email, phone, role, status, created_at, updated_at
                 FROM members
                 WHERE login_id = ?
                 """;
-
-        // DB 연결 → SQL 실행 → 결과 처리
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, loginId);
 
             try (ResultSet rs = pstmt.executeQuery()) {
-
                 if (rs.next()) {
-
                     return new Member(
-                            rs.getLong("member_id"),
                             rs.getString("login_id"),
                             rs.getString("password"),
                             rs.getString("nickname"),
-                            rs.getString("name"),
-                            rs.getString("email"),
-                            rs.getString("phone"),
-                            rs.getString("role"),
-                            rs.getString("status"),
-                            rs.getTimestamp("created_at").toLocalDateTime(),
-                            rs.getTimestamp("updated_at") == null ? null :
-                                    rs.getTimestamp("updated_at").toLocalDateTime()
+                            rs.getString("name")
                     );
                 }
             }
-
         } catch (Exception e) {
             System.out.println("회원 조회 실패: " + e.getMessage());
         }
-
         return null;
     }
 
+    // 회원 탈퇴 (INACTIVE 처리)
     @Override
-    public boolean existsByLoginId(String loginId) {
-        // 회원가입 파트에서 사용할 예정 (지금은 미구현)
-        return false;
-    }
+    public int deactivateMember(int memberId) {
+        int result = 0;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
 
-    @Override
-    public void save(Member member) {
-        // 회원가입 파트에서 사용할 예정 (지금은 미구현)
+        String sql = "UPDATE members SET status = 'INACTIVE' WHERE member_id = ?";
+
+        try {
+            conn = DBConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, memberId);
+            result = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 }

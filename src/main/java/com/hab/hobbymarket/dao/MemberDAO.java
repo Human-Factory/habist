@@ -12,4 +12,7 @@ public interface MemberDAO {
 
     // 로그인용 회원 조회
     Member findByLoginId(String loginId);
+
+    // 회원 상태 변경
+    int deactivateMember(int memberId);
 }
