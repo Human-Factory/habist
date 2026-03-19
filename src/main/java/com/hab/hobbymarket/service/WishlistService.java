@@ -1,5 +1,6 @@
 package com.hab.hobbymarket.service;
 
+<<<<<<< HEAD
 import com.hab.hobbymarket.dao.WishlistDAO;
 import com.hab.hobbymarket.model.Wishlist;
 
@@ -17,3 +18,15 @@ public class WishlistService {
         return wishlistDAO.findByMemberId(memberId);
     }
 }
+=======
+import java.sql.Connection;
+
+public class WishlistService {
+
+    private Connection con;
+
+    public WishlistService(Connection con) {
+        this.con = con;
+    }
+}
+>>>>>>> ea1729a79b358d43cc1ab27c8bf2d6c7cb03e929

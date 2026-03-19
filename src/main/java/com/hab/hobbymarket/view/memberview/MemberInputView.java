@@ -1,17 +1,24 @@
 package com.hab.hobbymarket.view.memberview;
 
+import com.hab.hobbymarket.controller.MemberController;
 import com.hab.hobbymarket.model.MemberSignUpRequest;
 import java.util.Scanner;
 
 public class MemberInputView {
 
+    private MemberController memberController;
     private Scanner scanner = new Scanner(System.in);
+
+    public MemberInputView(MemberController memberController) {
+        this.memberController = memberController;
+    }
 
     // 회원가입 입력
     public MemberSignUpRequest getSignUpInput() {
 
         System.out.print("아이디 입력: ");
         String loginId = scanner.nextLine();
+
 
         System.out.print("비밀번호 입력: ");
         String password = scanner.nextLine();
