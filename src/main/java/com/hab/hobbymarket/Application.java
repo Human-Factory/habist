@@ -59,11 +59,13 @@ public class Application {
         // ============================================
 
         // 6. MainMenu 조립 (항상 가장 마지막!)
+        LoginView loginView = new LoginView();
         MainMenuInputView mainMenuInputView = new MainMenuInputView(
                 memberInputView,
                 enrollmentInputView,
                 subscriptionInputView,
-                wishlistInputView
+                wishlistInputView,
+                loginView
         );
 
         // 7. 첫 화면 호출
