@@ -9,4 +9,7 @@ public interface MemberDAO {
 
     // 회원 저장
     void save(Member member);
+
+    // 회원 상태 변경
+    int deactivateMember(int memberId);
 }
