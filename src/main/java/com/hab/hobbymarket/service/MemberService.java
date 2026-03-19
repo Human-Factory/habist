@@ -63,6 +63,8 @@ public class MemberService {
     public boolean deactivateMember(int memberId) {
         int result = ((MemberDAOImpl) memberDAO).deactivateMember(memberId);
         return result > 0;
+    }
+
     public MemberService(Connection con) {
         this.con = con;
     }
