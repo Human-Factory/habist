@@ -74,6 +74,10 @@ public class MemberDAOImpl implements MemberDAO {
 
         String sql = "UPDATE members SET status = 'INACTIVE' WHERE member_id = ?";
 
+
+        // 현재 아직 로그인이 완성이 안됐기 때문에 데이터 말소 기능은 안넣은 상태입니다. 로그인 기능이 구현 됐을 때 추가하기
+        //String sql = "UPDATE members SET status = 'INACTIVE' WHERE member_id = ? AND status = 'ACTIVE'";
+
         try {
             conn = DBConnection.getConnection();
             pstmt = conn.prepareStatement(sql);

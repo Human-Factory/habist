@@ -73,3 +73,6 @@ FROM enrollments e
          JOIN lectures l ON e.lecture_id = l.lecture_id
 WHERE e.member_id = 1;
 
+
+
+-- WHERE member_id = ? AND status = 'ACTIVE';
