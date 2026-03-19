@@ -2,13 +2,13 @@ package com.hab.hobbymarket.model;
 
 import java.security.Timestamp;
 
-public class Subscription {
+public class Wishlist {
     private int subscriptionId;
     private int memberId;
     private int instructorId;
     private Timestamp createdAt;
 
-    public Subscription(int subscriptionId, int memberId, int instructorId, Timestamp createdAt) {
+    public Wishlist(int subscriptionId, int memberId, int instructorId, Timestamp createdAt) {
         this.subscriptionId = subscriptionId;
         this.memberId = memberId;
         this.instructorId = instructorId;
@@ -49,7 +49,7 @@ public class Subscription {
 
     @Override
     public String toString() {
-        return "Subscription{" +
+        return "Wishlist{" +
                 "subscriptionId=" + subscriptionId +
                 ", memberId=" + memberId +
                 ", instructorId=" + instructorId +
