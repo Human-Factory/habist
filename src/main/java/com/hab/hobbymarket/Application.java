@@ -1,7 +1,6 @@
 package com.hab.hobbymarket;
 
 import com.hab.global.config.DBConnection;
-import com.hab.hobbymarket.controller.ContentController;
 import com.hab.hobbymarket.controller.EnrollmentController;
 import com.hab.hobbymarket.controller.MemberController;
 import com.hab.hobbymarket.controller.SubscriptionController;
@@ -35,6 +34,10 @@ public class Application {
         MemberService memberService = new MemberService();
         MemberController memberController = new MemberController(memberService);
         MemberInputView memberInputView = new MemberInputView(memberController);
+        // ============================================
+
+        // 3. Login 조립 ==============================
+        LoginView loginView = new LoginView();
         // ============================================
 
         // 3. Enrollment 조립 =========================
