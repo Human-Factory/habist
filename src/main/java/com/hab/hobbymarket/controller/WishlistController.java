@@ -7,12 +7,13 @@ import java.util.List;
 
 public class WishlistController {
 
-    private final WishlistService wishlistService = new WishlistService() {
-        public List<Wishlist> findByMemberId(int memberId) {
-            // Service에 memberId를 넘겨서 관심목록 조회
-            return wishlistService.findByMemberId(memberId);
+    // Service 객체 생성
+    private final WishlistService wishlistService = new WishlistService();
 
-        }
+    // 회원 ID로 관심목록 조회
+    public List<Wishlist> findByMemberId(int memberId) {
 
-    };
+        // Service 호출해서 관심목록 조회
+        return wishlistService.findByMemberId(memberId);
+    }
 }

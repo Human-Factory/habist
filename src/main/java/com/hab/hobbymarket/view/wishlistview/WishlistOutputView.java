@@ -6,15 +6,16 @@ import java.util.List;
 
 public class WishlistOutputView {
 
-    //관심목록 출력하는 메서드
+    // 관심목록 출력
     public static void printWishlist(List<Wishlist> wishlist) {
 
-        // if문 써서 관심 목록이 있는지 없는지 출력
+        // 조회 결과가 없으면 안내 문구 출력
         if (wishlist.isEmpty()) {
             System.out.println("관심목록이 없습니다.");
             return;
         }
 
+        // 조회 결과가 있으면 하나씩 출력
         for (Wishlist item : wishlist) {
             System.out.println(item);
         }

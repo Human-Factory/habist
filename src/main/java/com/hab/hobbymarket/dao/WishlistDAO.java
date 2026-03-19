@@ -17,7 +17,7 @@ public class WishlistDAO {
         List<Wishlist> wishlist = new ArrayList<>();
 
         // DB 연결 객체
-        Connection conn = null;
+        Connection con = null;
 
         // SQL 실행 객체
         PreparedStatement pstmt = null;
@@ -33,10 +33,10 @@ public class WishlistDAO {
 
         try {
             // DB 연결
-            conn = DBConnection.getConnection();
+            con = DBConnection.getConnection();
 
             // SQL 실행 준비
-            pstmt = conn.prepareStatement(sql);
+            pstmt = con.prepareStatement(sql);
 
             // 첫 번째 ? 자리에 memberId 넣기
             pstmt.setInt(1, memberId);

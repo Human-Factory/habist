@@ -1,50 +1,28 @@
 package com.hab.hobbymarket;
 
-import com.hab.hobbymarket.controller.ContentController;
-import com.hab.hobbymarket.controller.MemberController;
-import com.hab.hobbymarket.view.LoginView;
-import java.util.Scanner;
+import com.hab.hobbymarket.controller.WishlistController;
+import com.hab.hobbymarket.model.Wishlist;
+
+import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
-        MemberController memberController = new MemberController();
-        LoginView loginView = new LoginView();
-      
-        ContentController controller = new ContentController();
+        // Controller 생성
+        WishlistController controller = new WishlistController();
 
-        // LEC-001 테스트 : 카테고리 목록 조회
-        controller.showCategory();
+        // 테스트용 memberId (DB에 있는 값)
+        int memberId = 1;
 
-        // LEC-002 테스트 : 카테고리별 강의 목록 조회 (사용자 입력 포함)
-        controller.showLecturesByCategory();
+        // 관심목록 조회
+        List<Wishlist> list = controller.findByMemberId(memberId);
 
-        while (true) {
-            System.out.println("\n===== HABIS 메뉴 =====");
-            System.out.println("1. 회원가입");
-            System.out.println("2. 회원 탈퇴");
-            System.out.println("3. 로그인");
-            System.out.println("0. 종료");
-            System.out.print("선택: ");
-
-            int menu = sc.nextInt();
-
-            switch (menu) {
-                case 1:
-                    memberController.signUp();
-                    break;
-                case 2:
-                    memberController.deactivateMember();
-                    break;
-                case 3:
-                    loginView.login();
-                    break;
-                case 0:
-                    System.out.println("프로그램 종료");
-                    return;
-                default:
-                    System.out.println("잘못된 입력입니다.");
+        // 출력
+        if (list.isEmpty()) {
+            System.out.println("관심목록이 없습니다.");
+        } else {
+            for (Wishlist w : list) {
+                System.out.println(w);
             }
         }
     }
