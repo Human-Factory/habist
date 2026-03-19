@@ -12,6 +12,10 @@ public class MemberController {
     private MemberOutputView memberOutputView = new MemberOutputView();
     private MemberService memberService;
 
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
+    }
+    
     public void signUp() {
         // 1. View에서 입력값 받기
         MemberSignUpRequest request = memberInputView.getSignUpInput();
@@ -33,7 +37,5 @@ public class MemberController {
         } else {
             System.out.println("이미 회원 탈퇴했거나 존재하지 않는 아아디입니다.");
         }
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
-    }
+    
 }
