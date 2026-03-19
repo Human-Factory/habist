@@ -1,15 +1,7 @@
-db.url=jdbc:mysql://localhost:3306/lms_platform
-db.user=YOUR_USERNAME
-db.password=YOUR_PASSWORD
+# DB 연결 설정 예시 파일입니다.
+# 이 파일을 복사해서 db.properties 로 이름을 바꾸고
+# 본인 DB 정보로 수정해서 사용하세요.
 
-```
-
-이건 팀원 가이드용으로 Git에 올립니다. 참고부탁드립니다.
-
----
-
-**3. .gitignore에 추가**
-
-프로젝트 루트의 `.gitignore` 파일 열고 이 한 줄 추가:
-```
-프로젝트 루트 : src/main/resources/db.properties
+db.url=jdbc:mysql://127.0.0.1:3306/hobbymarket
+db.user=본인DB계정
+db.password=본인DB비밀번호
