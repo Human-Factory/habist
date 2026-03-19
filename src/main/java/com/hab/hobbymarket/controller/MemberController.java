@@ -16,9 +16,9 @@ public class MemberController {
 
         // 결과 출력
         if (result) {
-            System.out.println("회원 탈퇴 완료 (INACTIVE 처리됨)");
+            System.out.println("회원 탈퇴 완료");
         } else {
-            System.out.println("회원 탈퇴 실패");
+            System.out.println("이미 회원 탈퇴했거나 존재하지 않는 아아디입니다.");
         }
     }
 }
