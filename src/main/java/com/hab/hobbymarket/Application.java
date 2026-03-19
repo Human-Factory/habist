@@ -41,5 +41,8 @@ public class Application {
             }
         }
 
+        MemberController memberController = new MemberController();
+        memberController.signUp();
+
     }
 }
