@@ -1,7 +1,6 @@
 package com.hab.hobbymarket;
 
 import com.hab.global.config.DBConnection;
-import com.hab.hobbymarket.controller.ContentController;
 import com.hab.hobbymarket.controller.EnrollmentController;
 import com.hab.hobbymarket.controller.MemberController;
 import com.hab.hobbymarket.controller.SubscriptionController;
@@ -10,6 +9,7 @@ import com.hab.hobbymarket.service.EnrollmentService;
 import com.hab.hobbymarket.service.MemberService;
 import com.hab.hobbymarket.service.SubscriptionService;
 import com.hab.hobbymarket.service.WishlistService;
+import com.hab.hobbymarket.view.LoginView;
 import com.hab.hobbymarket.view.MainMenuInputView;
 import com.hab.hobbymarket.view.enrollmentview.EnrollmentInputView;
 import com.hab.hobbymarket.view.memberview.MemberInputView;
@@ -31,9 +31,13 @@ public class Application {
         System.out.println("✅ DB 연결 성공!");
 
         // 2. Member 조립 =============================
-        MemberService memberService = new MemberService(con);
+        MemberService memberService = new MemberService();
         MemberController memberController = new MemberController(memberService);
         MemberInputView memberInputView = new MemberInputView(memberController);
+        // ============================================
+
+        // 3. Login 조립 ==============================
+        LoginView loginView = new LoginView();
         // ============================================
 
         // 3. Enrollment 조립 =========================
