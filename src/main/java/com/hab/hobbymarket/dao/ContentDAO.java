@@ -130,6 +130,7 @@ public class ContentDAO {
         } finally {
             DBConnection.close(rs, pstmt, conn);
         }
+        // list에 반환
         return list;
     }
 }
