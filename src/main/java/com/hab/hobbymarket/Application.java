@@ -1,5 +1,6 @@
 package com.hab.hobbymarket;
 
+import com.hab.hobbymarket.controller.ContentController
 import com.hab.hobbymarket.controller.MemberController;
 import com.hab.hobbymarket.view.LoginView;
 import java.util.Scanner;
@@ -10,6 +11,14 @@ public class Application {
         Scanner sc = new Scanner(System.in);
         MemberController memberController = new MemberController();
         LoginView loginView = new LoginView();
+      
+        ContentController controller = new ContentController();
+
+        // LEC-001 테스트 : 카테고리 목록 조회
+        controller.showCategory();
+
+        // LEC-002 테스트 : 카테고리별 강의 목록 조회 (사용자 입력 포함)
+        controller.showLecturesByCategory();
 
         while (true) {
             System.out.println("\n===== HABIS 메뉴 =====");
