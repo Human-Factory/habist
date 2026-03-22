@@ -31,7 +31,7 @@ public class MemberDAOImpl implements MemberDAO {
 
     // 회원 저장
     @Override
-    public void save(Member member) {
+    public boolean save(Member member) {
         String sql = "INSERT INTO members (login_id, password, nickname, name, email, phone) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
@@ -44,10 +44,12 @@ public class MemberDAOImpl implements MemberDAO {
             pstmt.setString(5, member.getEmail());
             pstmt.setString(6, member.getPhone());
 
-            pstmt.executeUpdate();
+            int rows = pstmt.executeUpdate();
+            return rows > 0;
 
         } catch (Exception e) {
             System.out.println("회원 저장 실패: " + e.getMessage());
+            return false;
         }
     }
 
@@ -67,10 +69,18 @@ public class MemberDAOImpl implements MemberDAO {
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     return new Member(
+                            rs.getLong("member_id"),
                             rs.getString("login_id"),
                             rs.getString("password"),
                             rs.getString("nickname"),
-                            rs.getString("name")
+                            rs.getString("name"),
+                            rs.getString("email"),
+                            rs.getString("phone"),
+                            rs.getString("role"),
+                            rs.getString("status"),
+                            rs.getTimestamp("created_at").toLocalDateTime(),
+                            rs.getTimestamp("updated_at") == null ? null :
+                                    rs.getTimestamp("updated_at").toLocalDateTime()
                     );
                 }
             }

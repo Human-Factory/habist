@@ -13,6 +13,12 @@ public class MemberInputView {
         this.memberController = memberController;
     }
 
+    // 회원가입 전체 흐름 실행
+    public void signUp() {
+        MemberSignUpRequest request = getSignUpInput();
+        memberController.signUp(request);
+    }
+
     // 회원가입 입력
     public MemberSignUpRequest getSignUpInput() {
 

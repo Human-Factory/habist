@@ -53,8 +53,15 @@ public class MemberService {
                 request.getNickname(),
                 request.getName()
         );
-        memberDAO.save(member);
-        System.out.println("회원가입 성공!");
+        member.setEmail(request.getEmail());
+        member.setPhone(request.getPhone());
+
+        boolean saved = memberDAO.save(member);
+        if (saved) {
+            System.out.println("회원가입 성공!");
+        } else {
+            System.out.println("회원가입 실패! 다시 시도해주세요.");
+        }
     }
 
     // 회원 탈퇴

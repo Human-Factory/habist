@@ -16,6 +16,11 @@ public class MemberController {
         this.memberInputView = new MemberInputView(this);
     }
     
+    public void signUp(MemberSignUpRequest request) {
+        // Service에 넘기기
+        memberService.signUp(request);
+    }
+
     public void signUp() {
         // 1. View에서 입력값 받기
         MemberSignUpRequest request = memberInputView.getSignUpInput();
