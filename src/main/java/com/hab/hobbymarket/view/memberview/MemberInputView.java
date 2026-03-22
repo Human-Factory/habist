@@ -38,10 +38,9 @@ public class MemberInputView {
         return new MemberSignUpRequest(loginId, password, email, nickname, name, phone);
     }
 
-    // 회원 탈퇴용 ID 입력
-    public static int inputMemberId() {
+    public boolean confirmDelete() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("탈퇴할 회원 ID 입력: ");
-        return sc.nextInt();
+        System.out.print("정말 탈퇴하시겠습니까? (Y/N): ");
+        return sc.nextLine().equalsIgnoreCase("Y");
     }
 }
