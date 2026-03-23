@@ -1,5 +1,6 @@
 package com.hab.hobbymarket.view;
 
+import com.hab.hobbymarket.session.SessionManager;
 import com.hab.hobbymarket.view.enrollmentview.EnrollmentInputView;
 import com.hab.hobbymarket.view.memberview.MemberInputView;
 import com.hab.hobbymarket.view.subscriptionview.SubscriptionInputView;

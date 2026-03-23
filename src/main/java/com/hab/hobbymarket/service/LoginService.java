@@ -62,7 +62,12 @@ public class LoginService {
         // 7. 로그인 성공 → 시도 초기화 + 세션 저장
         attemptDAO.reset(id);
         SessionManager.setCurrentUser(member);
-        
+
+        // 9. 관리자 계정인지 확인
+        if (Member.ROLE_ADMIN.equals(member.getRole())) {
+            System.out.println("관리자 계정으로 로그인했습니다.");
+        }
+
         return LoginResult.SUCCESS;
     }
 }
