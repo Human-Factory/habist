@@ -63,7 +63,7 @@ public class LoginService {
         attemptDAO.reset(id);
         SessionManager.setCurrentUser(member);
 
-        // 9. 관리자 계정인지 확인
+        // 8. 관리자 계정인지 확인
         if (Member.ROLE_ADMIN.equals(member.getRole())) {
             System.out.println("관리자 계정으로 로그인했습니다.");
         }

@@ -2,11 +2,13 @@ package com.hab.hobbymarket;
 
 import com.hab.global.config.DBConnection;
 import com.hab.hobbymarket.controller.*;
+import com.hab.hobbymarket.dao.AdminDAO;
 import com.hab.hobbymarket.service.*;
 import com.hab.hobbymarket.view.HomepageView;
 import com.hab.hobbymarket.view.LoginView;
 import com.hab.hobbymarket.view.MainMenuInputView;
 import com.hab.hobbymarket.view.MypageView;
+import com.hab.hobbymarket.view.adminview.AdminInputView;
 import com.hab.hobbymarket.view.contentview.ContentInputView;
 import com.hab.hobbymarket.view.enrollmentview.EnrollmentInputView;
 import com.hab.hobbymarket.view.inquiryview.InquiryInputView;
@@ -98,6 +100,12 @@ public class Application {
             InquiryController inquiryController = new InquiryController(inquiryService);
             InquiryInputView inquiryInputView = new InquiryInputView(inquiryController);
 
+            AdminDAO adminDAO = new AdminDAO(con);
+            AdminService adminService = new AdminService(adminDAO);
+            AdminController adminController = new AdminController(adminService);
+            AdminInputView adminInputView = new AdminInputView(adminController);
+
+
             // ============================================================
             // 12. 마이페이지 조립
             // ============================================================
@@ -120,6 +128,14 @@ public class Application {
             // 14. 메인 메뉴 조립
             // ============================================================
             // 메인 메뉴에서 회원가입 / 로그인 / 관심목록 메뉴 진입 흐름을 담당
+//            MainMenuInputView mainMenuInputView = new MainMenuInputView(
+//                    memberInputView,
+//                    enrollmentInputView,
+//                    subscriptionInputView,
+//                    wishlistInputView,
+//                    loginView,
+//                    homepageView
+//            );
             MainMenuInputView mainMenuInputView = new MainMenuInputView(
                     memberInputView,
                     enrollmentInputView,
