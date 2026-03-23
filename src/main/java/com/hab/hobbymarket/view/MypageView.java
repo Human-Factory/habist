@@ -1,12 +1,21 @@
 package com.hab.hobbymarket.view;
 
+import com.hab.hobbymarket.controller.WishlistController;
 import com.hab.hobbymarket.model.Member;
 import com.hab.hobbymarket.session.SessionManager;
+import com.hab.hobbymarket.view.myinformationview.MyInfomationInputView;
 
 import java.util.Scanner;
 
 public class MypageView {
     Scanner sc = new Scanner(System.in);
+    private WishlistController wishlistController;
+    private MyInfomationInputView myInfomationInputView;
+
+    public MypageView(MyInfomationInputView myInfomationInputView, WishlistController wishlistController) {
+        this.wishlistController = wishlistController;
+        this.myInfomationInputView = myInfomationInputView;
+    }
 
     public void displayMyPageMenu() {
 
@@ -34,7 +43,14 @@ public class MypageView {
                     System.out.println("이름     : " + member.getName());
                     System.out.println("이메일   : " + member.getEmail());
                     System.out.println("전화번호 : " + member.getPhone());
+                    System.out.println("0. 내 정보 수정");
+                    String no1 = sc.nextLine();
+
+                    if (no1 == "0") {
+                        myInfomationInputView.myinfomodify();
+                    }
                 }
+                case "2" -> wishlistController.showMyWishlist();
                 case "0" -> { return; }
             }
         }

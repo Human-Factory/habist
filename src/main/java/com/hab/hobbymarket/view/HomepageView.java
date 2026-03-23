@@ -9,11 +9,17 @@ import java.util.Scanner;
 
 public class HomepageView {
 
+    public HomepageView(ContentController content,MypageView mypageView) {
+        this.content = content;
+        this.mypageView = mypageView; // 받아서 저장
+    }
+
     private static final Logger log = LoggerFactory.getLogger(HomepageView.class);
     LoginView loginView = new LoginView();
-    ContentController content = new ContentController();
+    ContentController content;
+    MypageView mypageView;
     Scanner sc = new Scanner(System.in);
-    MypageView mypageView = new MypageView();
+
 
     public void displayHomePage() {
 
@@ -32,8 +38,7 @@ public class HomepageView {
 
             switch (no) {
                 case "1" ->
-                    content.showLecturesByCategory();
-
+                        content.showLecturesByCategory();
 
                 case "2" -> mypageView.displayMyPageMenu();
 
