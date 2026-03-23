@@ -37,6 +37,7 @@ public class MainMenuInputView {
             System.out.println("===========================");
             System.out.println("1. 로그인");
             System.out.println("2. 회원가입");
+            System.out.println("3. 비밀번호를 잃어버렸어요");
             System.out.println("0. 종료");
             System.out.println("===========================");
             System.out.print("메뉴를 선택해주세요 : ");
@@ -53,6 +54,9 @@ public class MainMenuInputView {
 
                 case "2" ->
                     memberInputView.signUp();
+
+                case "3" ->
+                    memberInputView.getPasswordResetInput();
 
                 case "0" -> {
                     System.out.println("프로그램을 종료합니다.");

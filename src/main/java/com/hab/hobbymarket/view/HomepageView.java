@@ -9,10 +9,17 @@ import java.util.Scanner;
 
 public class HomepageView {
 
+    public HomepageView(ContentController content,MypageView mypageView) {
+        this.content = content;
+        this.mypageView = mypageView; // 받아서 저장
+    }
+
     private static final Logger log = LoggerFactory.getLogger(HomepageView.class);
     LoginView loginView = new LoginView();
-    ContentController content = new ContentController();
+    ContentController content;
+    MypageView mypageView;
     Scanner sc = new Scanner(System.in);
+
 
     public void displayHomePage() {
 
@@ -31,11 +38,9 @@ public class HomepageView {
 
             switch (no) {
                 case "1" ->
-                    content.showLecturesByCategory();
+                        content.showLecturesByCategory();
 
-
-//                case "2" ->
-                        // 마이페이지 기능 추가 예정
+                case "2" -> mypageView.displayMyPageMenu();
 
                 case "3" -> {
                     System.out.println("로그아웃 합니다");
