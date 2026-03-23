@@ -2,6 +2,8 @@ package com.hab.hobbymarket.view.memberview;
 
 import com.hab.hobbymarket.controller.MemberController;
 import com.hab.hobbymarket.model.MemberSignUpRequest;
+import com.hab.hobbymarket.model.PasswordResetRequest;
+
 import java.util.Scanner;
 
 public class MemberInputView {
@@ -48,5 +50,27 @@ public class MemberInputView {
         Scanner sc = new Scanner(System.in);
         System.out.print("정말 탈퇴하시겠습니까? (Y/N): ");
         return sc.nextLine().equalsIgnoreCase("Y");
+    }
+
+    // 비밀번호 재설정
+    public PasswordResetRequest getPasswordResetInput() {
+
+        // 비밀번호 재설정 화면 안내
+        System.out.println("===== 비밀번호 재설정 =====");
+
+        // 로그인 아이디 입력
+        System.out.print("아이디: ");
+        String loginId = scanner.nextLine();
+
+        // 본인 확인용 이름 입력
+        System.out.print("이름: ");
+        String name = scanner.nextLine();
+
+        // 새 비밀번호 입력
+        System.out.print("새 비밀번호: ");
+        String newPassword = scanner.nextLine();
+
+        // 입력받은 값을 DTO에 담아서 반환
+        return new PasswordResetRequest(loginId, name, newPassword);
     }
 }

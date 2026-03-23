@@ -86,4 +86,38 @@ public class MemberService {
         // 4. members 삭제 성공 여부 반환
         return result > 0;
     }
+
+    // 비밀번호 재설정
+    public boolean resetPassword(String loginId, String name, String newPassword) {
+
+        // 1. 아이디 빈값 체크
+        if (loginId == null || loginId.trim().isEmpty()) {
+            System.out.println("아이디를 입력해주세요.");
+            return false;
+        }
+
+        // 2. 이름 빈값 체크
+        if (name == null || name.trim().isEmpty()) {
+            System.out.println("이름을 입력해주세요.");
+            return false;
+        }
+
+        // 3. 새 비밀번호 형식 검증
+        if (newPassword == null || newPassword.length() < 8) {
+            System.out.println("비밀번호는 8자 이상이어야 합니다.");
+            return false;
+        }
+
+        // 4. 비밀번호 형식 검증
+        // 영문, 숫자, 특수문자 포함 여부 검사
+        if (!newPassword.matches(".*[a-zA-Z].*") ||
+                !newPassword.matches(".*[0-9].*") ||
+                !newPassword.matches(".*[!@#$%^&*].*")) {
+            System.out.println("비밀번호는 영문, 숫자, 특수문자를 포함해야 합니다.");
+            return false;
+        }
+
+        // 5. DAO 호출하여 실제 DB 비밀번호 변경
+        return memberDAO.updatePassword(loginId, name, newPassword);
+    }
 }
