@@ -19,12 +19,16 @@ public class MemberInputView {
         memberController.signUp(request);
     }
 
+    // Scanner 는 int 값을 입력 받게 되면 nextInt() 다음에 변수명.nextline() 을 한 번 하면 된다.
+
     // 회원가입 입력
     public MemberSignUpRequest getSignUpInput() {
 
         System.out.print("아이디 입력: ");
         String loginId = scanner.nextLine();
+        scanner.nextLine();
 
+        PrintPasswordPolicy();
 
         System.out.print("비밀번호 입력: ");
         String password = scanner.nextLine();
@@ -48,5 +52,11 @@ public class MemberInputView {
         Scanner sc = new Scanner(System.in);
         System.out.print("정말 탈퇴하시겠습니까? (Y/N): ");
         return sc.nextLine().equalsIgnoreCase("Y");
+    }
+
+    public void PrintPasswordPolicy(){
+        System.out.println("비밀번호 조건");
+        System.out.println("대소문자 구분");
+        System.out.println("영어, 숫자, 특수문자(!@#$%^&*)");
     }
 }
