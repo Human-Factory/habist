@@ -1,6 +1,7 @@
 package com.hab.hobbymarket.view.likesview;
 
 import java.util.Scanner;
+import com.hab.global.utils.ScannerUtil;
 
 /**
  * <역할>
@@ -17,7 +18,7 @@ public class LikesInputView {
         Controller 에서 가장 먼저 호출 : -1 이면 즉시 return 처리
      */
 
-        private final Scanner sc = new Scanner(System.in);
+        private final Scanner sc = ScannerUtil.getInstance();
 
         // 좋아요 등록/취소할 강의 번호 입력받기
         public int inputLectureId() {

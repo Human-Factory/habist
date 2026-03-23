@@ -76,6 +76,20 @@ public class ContentController {
         // 5. 강의 목록 조회 및 출력
         List<String[]> lectures = contentDAO.getLecturesByCategory(categoryId);
         outputView.showLectures(lectures);
+
+        // 6. 강의 번호 입력받기
+        if (lectures.isEmpty()) return;
+
+        int lectureId = inputView.inputLectureId();
+        if (lectureId == -1) {
+            outputView.showError("올바른 강의 번호를 입력해주세요.");
+            return;
+        }
+
+        // 7. 조회수 증가 + 강의 상세 조회 및 출력
+        contentDAO.increaseViewCount(lectureId);
+        String[] lecture = contentDAO.getLectureDetail(lectureId);
+        outputView.showLectureDetail(lecture);
     }
 
     // LEC-003 : 강의 상세 조회 + 조회수 증가
