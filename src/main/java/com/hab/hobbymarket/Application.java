@@ -17,6 +17,7 @@ import com.hab.hobbymarket.view.subscriptionview.SubscriptionInputView;
 import com.hab.hobbymarket.view.wishlistview.WishlistInputView;
 
 import java.sql.Connection;
+import java.util.Scanner;
 
 public class Application {
 
@@ -30,6 +31,8 @@ public class Application {
         }
         System.out.println("✅ DB 연결 성공!");
 
+        Scanner sc = new Scanner(System.in);
+
         // 2. Member 조립 =============================
         MemberService memberService = new MemberService();
         MemberController memberController = new MemberController(memberService);
@@ -37,7 +40,7 @@ public class Application {
         // ============================================
 
         // 3. Login 조립 ==============================
-        LoginView loginView = new LoginView();
+        LoginView loginView = new LoginView(sc);
         // ============================================
 
         // 3. Enrollment 조립 =========================
@@ -59,16 +62,14 @@ public class Application {
         // ============================================
 
         // 6. MainMenu 조립 (항상 가장 마지막!)
-<<<<<<< HEAD
-=======
-        
->>>>>>> 875d968e3f9f2a8629d90139680b29ff82fed2ea
         MainMenuInputView mainMenuInputView = new MainMenuInputView(
                 memberInputView,
                 enrollmentInputView,
                 subscriptionInputView,
                 wishlistInputView,
-                loginView
+                loginView,
+                sc,
+                memberController
         );
 
         // 7. 첫 화면 호출

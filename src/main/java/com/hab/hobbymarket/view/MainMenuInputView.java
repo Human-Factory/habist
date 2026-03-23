@@ -37,6 +37,10 @@ public class MainMenuInputView {
         this.memberController = memberController;
     }
 
+    public MainMenuInputView(MemberInputView memberInputView, EnrollmentInputView enrollmentInputView, SubscriptionInputView subscriptionInputView, WishlistInputView wishlistInputView, LoginView loginView) {
+
+    }
+
     public void displayMainMenu() {
         while (true) {
             System.out.println("\n===== HABIS 메뉴 =====");

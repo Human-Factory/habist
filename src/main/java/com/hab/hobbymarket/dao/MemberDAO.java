@@ -7,12 +7,20 @@ public interface MemberDAO {
     // 아이디 중복 체크 (있으면 true, 없으면 false)
     boolean existsByLoginId(String loginId);
 
-    // 회원 저장
-    void save(Member member);
+    // 회원 저장 (성공 true, 실패 false)
+    boolean save(Member member);
 
     // 로그인용 회원 조회
     Member findByLoginId(String loginId);
 
     // 회원 상태 변경
     int deactivateMember(int memberId);
+
+    boolean existsByMemberId(int memberId);
+
+    // 자식삭제 -> 부모삭제로 이루어져야하며 각 목록도 삭제
+    int deleteWishlistsByMemberId(int memberId);
+    int deleteEnrollmentsByMemberId(int memberId);
+    int deleteSubscriptionsByMemberId(int memberId);
+    int deleteMembersByMemberId(int memberId);
 }
