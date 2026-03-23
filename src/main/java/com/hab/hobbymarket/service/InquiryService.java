@@ -8,30 +8,16 @@ import java.util.List;
 
 public class InquiryService {
 
+    // 1. DAO 선언
     private final InquiryDAO inquiryDAO = new InquiryDAO();
 
-    // 문의 작성
-    public boolean save(String title, String content) {
-        Long memberId = SessionManager.getCurrentUser().getMemberId();
-        Inquiry inquiry = new Inquiry(memberId, title, content);
-        return inquiryDAO.save(inquiry);
-    }
-
-    // 내 문의 목록 조회
     public List<Inquiry> getMyInquiries() {
+
+        // SessionManager에서 현재 로그인한 유저 memberId 가져오기
         Long memberId = SessionManager.getCurrentUser().getMemberId();
+
+        // DAO 호출해서 결과 반환
         return inquiryDAO.findByMemberId(memberId);
-    }
 
-    // 문의 수정
-    public boolean update(Long inquiryId, String title, String content) {
-        Long memberId = SessionManager.getCurrentUser().getMemberId();
-        return inquiryDAO.update(inquiryId, memberId, title, content);
-    }
-
-    // 문의 삭제
-    public boolean delete(Long inquiryId) {
-        Long memberId = SessionManager.getCurrentUser().getMemberId();
-        return inquiryDAO.delete(inquiryId, memberId);
     }
 }

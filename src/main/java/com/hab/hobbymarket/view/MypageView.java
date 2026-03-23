@@ -1,10 +1,12 @@
 package com.hab.hobbymarket.view;
 
+import com.hab.hobbymarket.controller.InquiryController;
 import com.hab.hobbymarket.controller.InstructorController;
 import com.hab.hobbymarket.controller.WishlistController;
 import com.hab.hobbymarket.model.Member;
 import com.hab.hobbymarket.session.SessionManager;
 import com.hab.hobbymarket.view.enrollmentview.EnrollmentInputView;
+import com.hab.hobbymarket.view.inquiryview.InquiryInputView;
 import com.hab.hobbymarket.view.memberview.MemberInputView;
 import com.hab.hobbymarket.view.myinformationview.MyInfomationInputView;
 
@@ -17,17 +19,19 @@ public class MypageView {
     private MyInfomationInputView myInfomationInputView;
     private EnrollmentInputView enrollmentInputView;
     private MemberInputView memberInputView;
+    private InquiryInputView inquiryInputView;
 
     public MypageView(MyInfomationInputView myInfomationInputView,
                       WishlistController wishlistController,
                       InstructorController instructorController,
                       EnrollmentInputView enrollmentInputView,
-                      MemberInputView memberInputView) {
+                      MemberInputView memberInputView, InquiryInputView inquiryInputView) {
         this.wishlistController = wishlistController;
         this.myInfomationInputView = myInfomationInputView;
         this.instructorController = instructorController;
         this.enrollmentInputView = enrollmentInputView;
         this.memberInputView = memberInputView;
+        this.inquiryInputView = inquiryInputView;
     }
 
     public void displayMyPageMenu() {
@@ -68,6 +72,8 @@ public class MypageView {
                 case "2" -> wishlistController.showMyWishlist();
 
                 case "3" -> enrollmentInputView.showLearningMenu();
+
+                case "4" -> inquiryInputView.displayInquiryMenu();
 
                 case "7" -> instructorController.apply(member.getMemberId());
 

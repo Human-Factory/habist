@@ -9,6 +9,7 @@ import com.hab.hobbymarket.view.MainMenuInputView;
 import com.hab.hobbymarket.view.MypageView;
 import com.hab.hobbymarket.view.contentview.ContentInputView;
 import com.hab.hobbymarket.view.enrollmentview.EnrollmentInputView;
+import com.hab.hobbymarket.view.inquiryview.InquiryInputView;
 import com.hab.hobbymarket.view.memberview.MemberInputView;
 import com.hab.hobbymarket.view.myinformationview.MyInfomationInputView;
 import com.hab.hobbymarket.view.subscriptionview.SubscriptionInputView;
@@ -86,31 +87,37 @@ public class Application {
             ContentController contentController = new ContentController();
             ContentInputView contentInputView = new ContentInputView();
 
-            // Instructor 조립 ============================
+            // 9. Instructor 조립 ============================
             InstructorController instructorController = new InstructorController();
 
-            // Comment 조립 ============================
+            // 10. Comment 조립 ============================
             CommentsController commentsController = new CommentsController();
 
+            // 11. Inquiry 조립 =============================
+            InquiryService inquiryService = new InquiryService();
+            InquiryController inquiryController = new InquiryController(inquiryService);
+            InquiryInputView inquiryInputView = new InquiryInputView(inquiryController);
+
             // ============================================================
-            // 9. 마이페이지 조립
+            // 12. 마이페이지 조립
             // ============================================================
             MypageView mypageView = new MypageView(
                     myInfomationInputView,
                     wishlistController,
                     instructorController,
                     enrollmentInputView,
-                    memberInputView);
+                    memberInputView,
+                    inquiryInputView);
 
             // ============================================================
-            // 10. 홈페이지 조립
+            // 13. 홈페이지 조립
             // ============================================================
             HomepageView homepageView = new HomepageView(contentController, mypageView);
 
 
 
             // ============================================================
-            // 11. 메인 메뉴 조립
+            // 14. 메인 메뉴 조립
             // ============================================================
             // 메인 메뉴에서 회원가입 / 로그인 / 관심목록 메뉴 진입 흐름을 담당
             MainMenuInputView mainMenuInputView = new MainMenuInputView(
@@ -123,13 +130,13 @@ public class Application {
             );
 
             // ============================================================
-            // 12. 프로그램 시작
+            // 15. 프로그램 시작
             // ============================================================
             mainMenuInputView.displayMainMenu();
 
         } finally {
             // ============================================================
-            // 13. 프로그램 종료 시 DB 연결 닫기
+            // 16. 프로그램 종료 시 DB 연결 닫기
             // ============================================================
             DBConnection.close(con);
         }
