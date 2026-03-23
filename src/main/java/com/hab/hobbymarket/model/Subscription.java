@@ -1,22 +1,24 @@
 package com.hab.hobbymarket.model;
 
-import java.security.Timestamp;
+import java.time.LocalDate;
 
 public class Subscription {
 
-    // Subscription 변수 생성
-    private int subscriptionId;
-    private int memberId;
-    private int instructorId;
-    private Timestamp createdAt; // 날짜/ 시간 컬럼 생성
+   private int subscriptionId; // 구독 번호
+   private int memberId; // 회원 번호
+   private LocalDate startDate; // 구독 시작일
+   private LocalDate endDate; // 구독 만료일
+   private String status; // 구독 상태(active, cancle)
 
+    public Subscription() {}
 
-    // Subscription의 생성자, getter 및 setter, toString() 생성
-    public Subscription(int subscriptionId, int memberId, int instructorId, Timestamp createdAt) {
+    // 구독 생성자 생성
+    public Subscription(int subscriptionId, int memberId, LocalDate startDate, LocalDate endDate, String status) {
         this.subscriptionId = subscriptionId;
         this.memberId = memberId;
-        this.instructorId = instructorId;
-        this.createdAt = createdAt;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
     }
 
     public int getSubscriptionId() {
@@ -35,20 +37,28 @@ public class Subscription {
         this.memberId = memberId;
     }
 
-    public int getInstructorId() {
-        return instructorId;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setInstructorId(int instructorId) {
-        this.instructorId = instructorId;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
@@ -56,8 +66,9 @@ public class Subscription {
         return "Subscription{" +
                 "subscriptionId=" + subscriptionId +
                 ", memberId=" + memberId +
-                ", instructorId=" + instructorId +
-                ", createdAt=" + createdAt +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", status='" + status + '\'' +
                 '}';
     }
 }
