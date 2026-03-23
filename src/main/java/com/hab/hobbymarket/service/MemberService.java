@@ -65,8 +65,25 @@ public class MemberService {
     }
 
     // 회원 탈퇴
-    public boolean deactivateMember(int memberId) {
-        int result = ((MemberDAOImpl) memberDAO).deactivateMember(memberId);
+    public boolean deleteMember(int memberId) {
+
+        // 1. 회원 존재 여부 확인
+        boolean exists = memberDAO.existsByMemberId(memberId);
+
+        // 존재하지 않는 회원이면 바로 실패
+        if (!exists) {
+            return false;
+        }
+
+        // 2. 회원과 연결된 자식 데이터 먼저 삭제
+        memberDAO.deleteWishlistsByMemberId(memberId);
+        memberDAO.deleteEnrollmentsByMemberId(memberId);
+        memberDAO.deleteSubscriptionsByMemberId(memberId);
+
+        // 3. 마지막으로 회원 정보 삭제
+        int result = memberDAO.deleteMembersByMemberId(memberId);
+
+        // 4. members 삭제 성공 여부 반환
         return result > 0;
     }
 }
