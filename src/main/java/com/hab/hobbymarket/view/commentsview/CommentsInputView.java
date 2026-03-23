@@ -1,6 +1,7 @@
 package com.hab.hobbymarket.view.commentsview;
 
 import java.util.Scanner;
+import com.hab.global.utils.ScannerUtil;
 
 /** <역할>
  *      댓글 기능에 필요한 사용자 입력을 수신하는 View
@@ -16,7 +17,7 @@ public class CommentsInputView {
      */
 
     // Scanner 객체 사용 (하지만 private final을 통해서 변경 못하게 진행)
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner sc = ScannerUtil.getInstance();
 
     // 댓글 내용 입력받기
     public String inputContent() {

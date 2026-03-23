@@ -1,10 +1,11 @@
 package com.hab.hobbymarket.view.contentview;
 
 import java.util.Scanner;
+import com.hab.global.utils.ScannerUtil;
 
 public class ContentInputView {
 
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner sc = ScannerUtil.getInstance();
 
     // 카테고리 ID 입력받기
     public int inputCategoryId() {
