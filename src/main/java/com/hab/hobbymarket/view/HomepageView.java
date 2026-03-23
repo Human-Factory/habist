@@ -1,6 +1,8 @@
 package com.hab.hobbymarket.view;
 
 import com.hab.hobbymarket.controller.ContentController;
+import com.hab.hobbymarket.session.SessionManager;
+import com.hab.hobbymarket.view.adminview.AdminInputView;
 import com.mysql.cj.log.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +23,7 @@ public class HomepageView {
     MypageView mypageView;
     Scanner sc = ScannerUtil.getInstance();
 
-
+    // 사용자 페이지
     public void displayHomePage() {
 
         while (true) {
@@ -57,6 +59,35 @@ public class HomepageView {
             }
         }
 
+    }
+
+    // 관리자 페이지
+    public void displayAdminMenu() {
+        while (SessionManager.isLoggedIn()) {
+            System.out.println("\n========== 관리자 페이지 ==========");
+            System.out.println("1. 회원 관리");
+            System.out.println("2. 공지사항 관리");
+            System.out.println("3. Q&A 관리");
+            System.out.println("4. 로그아웃");
+            System.out.println("0. 메인으로");
+            System.out.print("선택 : ");
+
+            String menu = sc.nextLine().trim();
+
+            switch (menu) {
+                case "1" -> AdminInputView.showMemberManageMenu();
+                case "2" -> AdminInputView.showNoticeMenu();
+                case "3" -> AdminInputView.showQnaMenu();
+                case "4" -> {
+                    loginView.logout();
+                    return;
+                }
+                case "0" -> {
+                    return;
+                }
+                default -> System.out.println("올바른 번호를 입력해주세요.");
+            }
+        }
     }
 
 }

@@ -128,14 +128,6 @@ public class Application {
             // 14. 메인 메뉴 조립
             // ============================================================
             // 메인 메뉴에서 회원가입 / 로그인 / 관심목록 메뉴 진입 흐름을 담당
-//            MainMenuInputView mainMenuInputView = new MainMenuInputView(
-//                    memberInputView,
-//                    enrollmentInputView,
-//                    subscriptionInputView,
-//                    wishlistInputView,
-//                    loginView,
-//                    homepageView
-//            );
             MainMenuInputView mainMenuInputView = new MainMenuInputView(
                     memberInputView,
                     enrollmentInputView,
