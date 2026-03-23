@@ -5,6 +5,7 @@ import com.hab.hobbymarket.controller.WishlistController;
 import com.hab.hobbymarket.model.Member;
 import com.hab.hobbymarket.session.SessionManager;
 import com.hab.hobbymarket.view.enrollmentview.EnrollmentInputView;
+import com.hab.hobbymarket.view.memberview.MemberInputView;
 import com.hab.hobbymarket.view.myinformationview.MyInfomationInputView;
 
 import java.util.Scanner;
@@ -15,15 +16,18 @@ public class MypageView {
     private WishlistController wishlistController;
     private MyInfomationInputView myInfomationInputView;
     private EnrollmentInputView enrollmentInputView;
+    private MemberInputView memberInputView;
 
     public MypageView(MyInfomationInputView myInfomationInputView,
                       WishlistController wishlistController,
                       InstructorController instructorController,
-                      EnrollmentInputView enrollmentInputView) {
+                      EnrollmentInputView enrollmentInputView,
+                      MemberInputView memberInputView) {
         this.wishlistController = wishlistController;
         this.myInfomationInputView = myInfomationInputView;
         this.instructorController = instructorController;
         this.enrollmentInputView = enrollmentInputView;
+        this.memberInputView = memberInputView;
     }
 
     public void displayMyPageMenu() {
@@ -41,6 +45,7 @@ public class MypageView {
             System.out.println("5. 쪽지 목록");
             System.out.println("6. 피드백 목록");
             System.out.println("7. 강사 신청");
+            System.out.println("8. 회원 탈퇴");
             System.out.println("0. 뒤로가기");
             System.out.println("=============================");
             System.out.println("메뉴를 선택해 주세요: ");
@@ -65,6 +70,8 @@ public class MypageView {
                 case "3" -> enrollmentInputView.showLearningMenu();
 
                 case "7" -> instructorController.apply(member.getMemberId());
+
+                case "8" -> memberInputView.confirmDelete();
                 case "0" -> { return; }
             }
         }

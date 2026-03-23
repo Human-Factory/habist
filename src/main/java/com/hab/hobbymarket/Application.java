@@ -89,6 +89,9 @@ public class Application {
             // Instructor 조립 ============================
             InstructorController instructorController = new InstructorController();
 
+            // Comment 조립 ============================
+            CommentsController commentsController = new CommentsController();
+
             // ============================================================
             // 9. 마이페이지 조립
             // ============================================================
@@ -96,7 +99,8 @@ public class Application {
                     myInfomationInputView,
                     wishlistController,
                     instructorController,
-                    enrollmentInputView);
+                    enrollmentInputView,
+                    memberInputView);
 
             // ============================================================
             // 10. 홈페이지 조립
