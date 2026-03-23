@@ -16,6 +16,5 @@ public class LoginController {
     // 로그아웃 요청 처리
     public void logout() {
         SessionManager.clear();
-        System.out.println("로그아웃 되었습니다.");
     }
 }
