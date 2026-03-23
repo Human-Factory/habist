@@ -2,16 +2,16 @@ package com.hab.hobbymarket;
 
 import com.hab.global.config.DBConnection;
 import com.hab.hobbymarket.controller.*;
-import com.hab.hobbymarket.service.EnrollmentService;
-import com.hab.hobbymarket.service.MemberService;
-import com.hab.hobbymarket.service.SubscriptionService;
-import com.hab.hobbymarket.service.WishlistService;
+import com.hab.hobbymarket.service.*;
 import com.hab.hobbymarket.view.HomepageView;
 import com.hab.hobbymarket.view.LoginView;
 import com.hab.hobbymarket.view.MainMenuInputView;
+import com.hab.hobbymarket.view.MypageView;
 import com.hab.hobbymarket.view.contentview.ContentInputView;
 import com.hab.hobbymarket.view.enrollmentview.EnrollmentInputView;
+import com.hab.hobbymarket.view.inquiryview.InquiryInputView;
 import com.hab.hobbymarket.view.memberview.MemberInputView;
+import com.hab.hobbymarket.view.myinformationview.MyInfomationInputView;
 import com.hab.hobbymarket.view.subscriptionview.SubscriptionInputView;
 import com.hab.hobbymarket.view.wishlistview.WishlistInputView;
 
@@ -21,63 +21,6 @@ public class Application {
 
     public static void main(String[] args) {
 
-//        // 1. DB 연결
-//        Connection con = DBConnection.getConnection();
-//        if (con == null) {
-//            System.out.println("🚨 프로그램을 종료합니다.");
-//            return;
-//        }
-//        System.out.println("✅ DB 연결 성공!");
-//
-//        // 2. Member 조립 =============================
-//        MemberService memberService = new MemberService();
-//        MemberController memberController = new MemberController(memberService);
-//        MemberInputView memberInputView = new MemberInputView(memberController);
-//        // ============================================
-//
-//        // 3. Login 조립 ==============================
-//        LoginView loginView = new LoginView();
-//        // ============================================
-//
-//        // 3. Enrollment 조립 =========================
-//        EnrollmentService enrollmentService = new EnrollmentService(con);
-//        EnrollmentController enrollmentController = new EnrollmentController(enrollmentService);
-//        EnrollmentInputView enrollmentInputView = new EnrollmentInputView(enrollmentController);
-//        // ============================================
-//
-//        // 4. Subscription 조립 =======================
-//        SubscriptionService subscriptionService = new SubscriptionService(con);
-//        SubscriptionController subscriptionController = new SubscriptionController(subscriptionService);
-//        SubscriptionInputView subscriptionInputView = new SubscriptionInputView(subscriptionController);
-//        // ============================================
-//
-//        // 5. Wishlist 조립 ===========================
-//        WishlistService wishlistService = new WishlistService(con);
-//        WishlistController wishlistController = new WishlistController(wishlistService);
-//        WishlistInputView wishlistInputView = new WishlistInputView(wishlistController);
-//        // ============================================
-//
-//        // 6. MainMenu 조립 (항상 가장 마지막!)
-//
-//        MainMenuInputView mainMenuInputView = new MainMenuInputView(
-//                memberInputView,
-//                enrollmentInputView,
-//                subscriptionInputView,
-//                wishlistInputView,
-//                loginView
-//        );
-//
-//        // 7. 첫 화면 호출
-//        mainMenuInputView.displayMainMenu();
-//
-//        // 8. 종료 시 DB 닫기
-//        DBConnection.close(con);
-//    }
-        // ============================================================
-        // 1. DB 연결
-        // ============================================================
-        // DBConnection에서 Connection 객체를 가져온다.
-        // 이후 Enrollment / Subscription / Wishlist 쪽 Service에서 이 연결을 사용한다.
         Connection con = DBConnection.getConnection();
 
         // DB 연결이 실패하면 더 진행할 수 없으므로 프로그램 종료
@@ -129,20 +72,52 @@ public class Application {
             WishlistInputView wishlistInputView = new WishlistInputView(wishlistController);
 
             // ============================================================
-            // 7. Content 기능 조립
+            // 7. 내 정보 수정 기능 조립
+            // ============================================================
+            // 정보 수정 관련 기능
+            MyInformationService myInformationService = new MyInformationService(con);
+            MyInformationController myInformationController = new MyInformationController(myInformationService);
+            MyInfomationInputView myInfomationInputView = new MyInfomationInputView(myInformationController);
+
+            // ============================================================
+            // 8. Content 기능 조립
             // ============================================================
             // 강의 조회 관련 기능
             // Service 없이 Controller만 생성!
             ContentController contentController = new ContentController();
             ContentInputView contentInputView = new ContentInputView();
 
-            // ============================================================
-            // 8. 홈페이지 조립
-            // ============================================================
-            HomepageView homepageView = new HomepageView();
+            // 9. Instructor 조립 ============================
+            InstructorController instructorController = new InstructorController();
+
+            // 10. Comment 조립 ============================
+            CommentsController commentsController = new CommentsController();
+
+            // 11. Inquiry 조립 =============================
+            InquiryService inquiryService = new InquiryService();
+            InquiryController inquiryController = new InquiryController(inquiryService);
+            InquiryInputView inquiryInputView = new InquiryInputView(inquiryController);
 
             // ============================================================
-            // 9. 메인 메뉴 조립
+            // 12. 마이페이지 조립
+            // ============================================================
+            MypageView mypageView = new MypageView(
+                    myInfomationInputView,
+                    wishlistController,
+                    instructorController,
+                    enrollmentInputView,
+                    memberInputView,
+                    inquiryInputView);
+
+            // ============================================================
+            // 13. 홈페이지 조립
+            // ============================================================
+            HomepageView homepageView = new HomepageView(contentController, mypageView);
+
+
+
+            // ============================================================
+            // 14. 메인 메뉴 조립
             // ============================================================
             // 메인 메뉴에서 회원가입 / 로그인 / 관심목록 메뉴 진입 흐름을 담당
             MainMenuInputView mainMenuInputView = new MainMenuInputView(
@@ -155,13 +130,13 @@ public class Application {
             );
 
             // ============================================================
-            // 10. 프로그램 시작
+            // 15. 프로그램 시작
             // ============================================================
             mainMenuInputView.displayMainMenu();
 
         } finally {
             // ============================================================
-            // 11. 프로그램 종료 시 DB 연결 닫기
+            // 16. 프로그램 종료 시 DB 연결 닫기
             // ============================================================
             DBConnection.close(con);
         }

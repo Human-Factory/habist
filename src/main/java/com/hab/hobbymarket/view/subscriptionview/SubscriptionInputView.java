@@ -3,6 +3,7 @@ package com.hab.hobbymarket.view.subscriptionview;
 import com.hab.hobbymarket.controller.SubscriptionController;
 
 import java.util.Scanner;
+import com.hab.global.utils.ScannerUtil;
 
 public class SubscriptionInputView {
 
@@ -10,7 +11,7 @@ public class SubscriptionInputView {
         private final SubscriptionController subscriptionController;
 
         // 입력용 Scanner
-        private final Scanner sc = new Scanner(System.in);
+        private final Scanner sc = ScannerUtil.getInstance();
 
     public SubscriptionInputView(SubscriptionController subscriptionController) {
             this.subscriptionController = subscriptionController;

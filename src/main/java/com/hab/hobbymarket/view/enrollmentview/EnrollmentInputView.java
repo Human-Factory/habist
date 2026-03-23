@@ -2,10 +2,11 @@ package com.hab.hobbymarket.view.enrollmentview;
 
 import com.hab.hobbymarket.controller.EnrollmentController;
 import java.util.Scanner;
+import com.hab.global.utils.ScannerUtil;
 
 public class EnrollmentInputView {
     private final EnrollmentController controller;
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner sc = ScannerUtil.getInstance();
 
     public EnrollmentInputView(EnrollmentController controller) {
         this.controller = controller;

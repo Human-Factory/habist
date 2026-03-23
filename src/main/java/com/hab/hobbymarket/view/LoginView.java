@@ -6,11 +6,12 @@ import com.hab.hobbymarket.session.SessionManager;
 import com.hab.hobbymarket.model.Member;
 
 import java.util.Scanner;
+import com.hab.global.utils.ScannerUtil;
 
 public class LoginView {
 
     private final LoginController loginController = new LoginController();
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner sc = ScannerUtil.getInstance();
 
     // 로그인 성공 여부를 boolean 타입으로 반환 시키기 위해 void -> boolean으로 변경
     public boolean login() {

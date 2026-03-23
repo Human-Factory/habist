@@ -65,6 +65,8 @@ public class Member {
     // -----------------------------------------------
     // Setter
     // -----------------------------------------------
+    public void setNickname(String nickname) { this.nickname = nickname; }
+    public void setPassword(String password) { this.password = password; }
     public void setMemberId(Long memberId) { this.memberId = memberId; }
     public void setEmail(String email)     { this.email = email; }
     public void setPhone(String phone)     { this.phone = phone; }

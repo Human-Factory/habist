@@ -2,13 +2,14 @@ package com.hab.hobbymarket.view.wishlistview;
 
 import com.hab.hobbymarket.controller.WishlistController;
 import java.util.Scanner;
+import com.hab.global.utils.ScannerUtil;
 
 public class WishlistInputView {
     // Controller에 사용자 입력을 전달
     private final WishlistController wishlistController;
 
     // 콘솔 입력용 Scanner
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner sc = ScannerUtil.getInstance();
 
     // 생성자
     public WishlistInputView(WishlistController wishlistController) {
