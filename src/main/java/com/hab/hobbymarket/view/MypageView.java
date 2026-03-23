@@ -46,7 +46,7 @@ public class MypageView {
                     System.out.println("0. 내 정보 수정");
                     String no1 = sc.nextLine();
 
-                    if (no1 == "0") {
+                    if (no1.equals("0")) {
                         myInfomationInputView.myinfomodify();
                     }
                 }

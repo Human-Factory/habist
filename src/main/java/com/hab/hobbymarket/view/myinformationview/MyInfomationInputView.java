@@ -1,6 +1,8 @@
 package com.hab.hobbymarket.view.myinformationview;
 
 import com.hab.hobbymarket.controller.MyInformationController;
+import com.hab.hobbymarket.model.Member;
+import com.hab.hobbymarket.session.SessionManager;
 
 import java.util.Scanner;
 
@@ -13,6 +15,7 @@ public class MyInfomationInputView {
     }
 
     public void myinfomodify() {
+        Member member = SessionManager.getCurrentUser();
 
         // 1. 비밀번호 확인
         System.out.print("현재 비밀번호를 입력해주세요 : ");
@@ -36,10 +39,30 @@ public class MyInfomationInputView {
             System.out.println("0. 뒤로가기");
 
             switch (sc.nextLine()) {
-                case "1" -> myInformationController.updateNickname();
-                case "2" -> myInformationController.updateEmail();
-                case "3" -> myInformationController.updatePhone();
-                case "4" -> myInformationController.updatePwd();
+                case "1" ->{
+                    String nickname = member.getNickname();
+                    System.out.println("변경할 닉네임을 입력해주십시오(현재 닉네임 :"+ nickname + ") : ");
+                    String newNickname = sc.nextLine();
+                    myInformationController.updateNickname(newNickname);
+                }
+                case "2" ->{
+                    String email = member.getEmail();
+                    System.out.println("변경할 닉네임을 입력해주십시오(현재 이메일 :"+ email + ") : ");
+                    String newEmail = sc.nextLine();
+                    myInformationController.updateEmail(newEmail);
+                }
+                case "3" ->{
+                    String phone = member.getPhone();
+                    System.out.println("변경할 전화번호를 입력해주십시오(현재 전화번호 :"+ phone + ") : ");
+                    String newPhone = sc.nextLine();
+                    myInformationController.updatePhone(newPhone);
+                }
+                case "4" -> {
+                    // password 는 비밀번호 검증 단계에서 이미 가져옴
+                    System.out.println("변경할 닉네임을 입력해주십시오(현재 이메일 :"+ password + ") : ");
+                    String newPassword = sc.nextLine();
+                    myInformationController.updatePassword(newPassword);
+                }
                 case "0" -> { return; }
             }
         }
