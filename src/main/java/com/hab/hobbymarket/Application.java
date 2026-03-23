@@ -17,7 +17,6 @@ import com.hab.hobbymarket.view.subscriptionview.SubscriptionInputView;
 import com.hab.hobbymarket.view.wishlistview.WishlistInputView;
 
 import java.sql.Connection;
-import java.util.Scanner;
 
 public class Application {
 
@@ -31,52 +30,52 @@ public class Application {
         }
         System.out.println("✅ DB 연결 성공!");
 
-        // 2. Scanner 하나만 생성해서 전체에서 공유
-        Scanner sc = new Scanner(System.in);
-
-        // 3. Member 조립 =============================
+        // 2. Member 조립 =============================
         MemberService memberService = new MemberService();
         MemberController memberController = new MemberController(memberService);
         MemberInputView memberInputView = new MemberInputView(memberController);
         // ============================================
 
-        // 4. Login 조립 ==============================
-        LoginView loginView = new LoginView(sc);
+        // 3. Login 조립 ==============================
+        LoginView loginView = new LoginView();
         // ============================================
 
-        // 5. Enrollment 조립 =========================
+        // 3. Enrollment 조립 =========================
         EnrollmentService enrollmentService = new EnrollmentService(con);
         EnrollmentController enrollmentController = new EnrollmentController(enrollmentService);
         EnrollmentInputView enrollmentInputView = new EnrollmentInputView(enrollmentController);
         // ============================================
 
-        // 6. Subscription 조립 =======================
+        // 4. Subscription 조립 =======================
         SubscriptionService subscriptionService = new SubscriptionService(con);
         SubscriptionController subscriptionController = new SubscriptionController(subscriptionService);
         SubscriptionInputView subscriptionInputView = new SubscriptionInputView(subscriptionController);
         // ============================================
 
-        // 7. Wishlist 조립 ===========================
+        // 5. Wishlist 조립 ===========================
         WishlistService wishlistService = new WishlistService(con);
         WishlistController wishlistController = new WishlistController(wishlistService);
         WishlistInputView wishlistInputView = new WishlistInputView(wishlistController);
         // ============================================
 
-        // 8. MainMenu 조립 (항상 가장 마지막!)
+        // 6. MainMenu 조립 (항상 가장 마지막!)
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 875d968e3f9f2a8629d90139680b29ff82fed2ea
         MainMenuInputView mainMenuInputView = new MainMenuInputView(
                 memberInputView,
                 enrollmentInputView,
                 subscriptionInputView,
                 wishlistInputView,
-                loginView,
-                sc,
-                memberController
+                loginView
         );
 
-        // 9. 첫 화면 호출
+        // 7. 첫 화면 호출
         mainMenuInputView.displayMainMenu();
 
-        // 10. 종료 시 DB 닫기
+        // 8. 종료 시 DB 닫기
         DBConnection.close(con);
     }
+
 }
