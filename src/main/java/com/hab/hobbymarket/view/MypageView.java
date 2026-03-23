@@ -9,9 +9,10 @@ import com.hab.hobbymarket.view.memberview.MemberInputView;
 import com.hab.hobbymarket.view.myinformationview.MyInfomationInputView;
 
 import java.util.Scanner;
+import com.hab.global.utils.ScannerUtil;
 
 public class MypageView {
-    Scanner sc = new Scanner(System.in);
+    Scanner sc = ScannerUtil.getInstance();
     private InstructorController instructorController;
     private WishlistController wishlistController;
     private MyInfomationInputView myInfomationInputView;

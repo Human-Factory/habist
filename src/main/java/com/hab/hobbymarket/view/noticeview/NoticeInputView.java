@@ -1,6 +1,7 @@
 package com.hab.hobbymarket.view.noticeview;
 
 import java.util.Scanner;
+import com.hab.global.utils.ScannerUtil;
 
 /** <역할>
  *      공지사항 기능에 필요한 사용자 입력을 수신하는 View
@@ -17,7 +18,7 @@ public class NoticeInputView {
      */
 
     // Scanner 객체 사용
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner sc = ScannerUtil.getInstance();
 
     // 공지사항 번호 입력받기
     public int inputNoticeId() {
