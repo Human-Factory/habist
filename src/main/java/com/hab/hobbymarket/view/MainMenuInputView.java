@@ -1,5 +1,8 @@
 package com.hab.hobbymarket.view;
 
+import com.hab.hobbymarket.model.Member;
+import com.hab.hobbymarket.session.SessionManager;
+import com.hab.hobbymarket.view.adminview.AdminInputView;
 import com.hab.hobbymarket.view.enrollmentview.EnrollmentInputView;
 import com.hab.hobbymarket.view.memberview.MemberInputView;
 import com.hab.hobbymarket.view.subscriptionview.SubscriptionInputView;
@@ -48,9 +51,17 @@ public class MainMenuInputView {
             switch (no) {
                 case "1" -> {
                     boolean isLoggedIn = loginView.login();
-                    if (isLoggedIn) {
-                        homepageView.displayHomePage();
+                    if (SessionManager.getCurrentUser().getRole().equals(Member.ROLE_ADMIN)) {
+
+                        System.out.println("관리자 페이지로 이동합니다.");
+                        homepageView.displayAdminMenu();
+
+                    } else {
+
+                        System.out.println("메인 페이지로 이동합니다.");
+                        homepageView.displayHomePage();   // 네 메서드 이름 맞춰서 수정
                     }
+
                 }
 
                 case "2" ->
@@ -67,4 +78,5 @@ public class MainMenuInputView {
             }
         }
     }
+
 }
