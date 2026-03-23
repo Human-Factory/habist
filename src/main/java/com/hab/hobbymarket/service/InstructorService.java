@@ -13,6 +13,16 @@ public class InstructorService {
 
     // 강의자 신청 (REQ-INS-003)
     public void apply(Long memberId) {
+        InstructorApplication existing = instructorDAO.findByMemberId(memberId);
+        if (existing != null) {
+            if (existing.getStatus().equals(InstructorApplication.STATUS_PENDING)) {
+                System.out.println("이미 신청된 상태입니다");
+            } else if (existing.getStatus().equals(InstructorApplication.STATUS_APPROVED)) {
+                System.out.println("이미 승인된 상태입니다!");
+            }
+            return;
+        }
+
         InstructorApplication application = new InstructorApplication(memberId);
         instructorDAO.save(application);
         System.out.println("강의자 신청이 완료되었습니다.");
