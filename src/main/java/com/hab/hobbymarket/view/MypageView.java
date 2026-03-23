@@ -1,5 +1,6 @@
 package com.hab.hobbymarket.view;
 
+import com.hab.hobbymarket.controller.InstructorController;
 import com.hab.hobbymarket.controller.WishlistController;
 import com.hab.hobbymarket.model.Member;
 import com.hab.hobbymarket.session.SessionManager;
@@ -9,12 +10,16 @@ import java.util.Scanner;
 
 public class MypageView {
     Scanner sc = new Scanner(System.in);
+    private InstructorController instructorController;
     private WishlistController wishlistController;
     private MyInfomationInputView myInfomationInputView;
 
-    public MypageView(MyInfomationInputView myInfomationInputView, WishlistController wishlistController) {
+    public MypageView(MyInfomationInputView myInfomationInputView,
+                      WishlistController wishlistController,
+                      InstructorController instructorController) {
         this.wishlistController = wishlistController;
         this.myInfomationInputView = myInfomationInputView;
+        this.instructorController = instructorController;
     }
 
     public void displayMyPageMenu() {
@@ -31,6 +36,7 @@ public class MypageView {
             System.out.println("4. 문의 목록");
             System.out.println("5. 쪽지 목록");
             System.out.println("6. 피드백 목록");
+            System.out.println("7. 강사 신청");
             System.out.println("0. 뒤로가기");
             System.out.println("=============================");
             System.out.println("메뉴를 선택해 주세요: ");
@@ -51,6 +57,8 @@ public class MypageView {
                     }
                 }
                 case "2" -> wishlistController.showMyWishlist();
+
+                case "7" -> instructorController.apply(member.getMemberId());
                 case "0" -> { return; }
             }
         }

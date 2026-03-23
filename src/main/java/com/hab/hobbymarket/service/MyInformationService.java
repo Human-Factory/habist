@@ -90,7 +90,7 @@ public class MyInformationService {
         if (result) {
             // SessionManager에서 현재 유저 꺼내서
             // 닉네임을 새 닉네임으로 변경
-            SessionManager.getCurrentUser().setNickname(newPassword);
+            SessionManager.getCurrentUser().setPassword(newPassword);
         }
 
         // 4. 결과 반환

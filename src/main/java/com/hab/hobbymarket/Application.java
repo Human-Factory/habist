@@ -86,12 +86,13 @@ public class Application {
             ContentController contentController = new ContentController();
             ContentInputView contentInputView = new ContentInputView();
 
-
+            // Instructor 조립 ============================
+            InstructorController instructorController = new InstructorController();
 
             // ============================================================
             // 9. 마이페이지 조립
             // ============================================================
-            MypageView mypageView = new MypageView(myInfomationInputView,wishlistController);
+            MypageView mypageView = new MypageView(myInfomationInputView,wishlistController,instructorController);
 
             // ============================================================
             // 10. 홈페이지 조립

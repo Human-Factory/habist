@@ -1,18 +1,12 @@
 package com.hab.hobbymarket.controller;
 
-import com.hab.hobbymarket.model.Member;
 import com.hab.hobbymarket.service.MyInformationService;
-import com.hab.hobbymarket.session.SessionManager;
-import com.hab.hobbymarket.view.myinformationview.MyInfomationInputView;
-
-import java.util.Scanner;
 
 public class MyInformationController {
     private MyInformationService myInformationService;
     public MyInformationController(MyInformationService myInformationService) {
         this.myInformationService = myInformationService;
     }
-    Scanner sc = new Scanner(System.in);
 
     public boolean verifyPassword(String password) {
         return myInformationService.verifyPassword(password);
