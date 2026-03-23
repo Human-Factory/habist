@@ -43,7 +43,7 @@ public class MainMenuInputView {
             switch (no) {
                 case "1" -> loginView.login();
                 case "2" -> {
-                    memberInputView.getSignUpInput();
+                    memberInputView.signUp();
                     loginView.login();
                 }
                 case "0" -> {
