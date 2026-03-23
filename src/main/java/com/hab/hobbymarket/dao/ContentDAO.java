@@ -220,4 +220,136 @@ public class ContentDAO {
         }
     }
 
+    // 6. 강의 목록 정렬
+
+    /* comment.
+        <역할>
+        기존 getLecturesByCategory() 와 유사하지만, SQL 쿼리에서 ORDER BY를 통해 정렬을 한다.
+        사용자가 선택한 최신순, 조회수순, 좋아요순으로 정렬을 한다.
+        <영향>
+        1. ContentInputView.inputSortOption() 에서 정렬 옵션 선택받기
+        2. ContentController.showLecturesSorted()
+        3. ContentDAO.getLecturesSorted()
+        4. ContentOutputView.showLectures() : 기존 목록 출력 재사용 가능
+     */
+
+    public List<String[]> getLecturesSorted(int categoryId, String sortType) {
+        List<String[]> list = new ArrayList<>();
+
+        // 스위치 문을 통해서 정렬 방식 선정
+        String orderBy;
+        switch (sortType) {
+            case "2": orderBy = "l.view_count DESC"; break;
+            case "3": orderBy = "l.like_count DESC"; break;
+            default:  orderBy = "l.created_at DESC"; break;
+        }
+
+        // SQL 구문 (정렬 순서를 ORDER BY로 정렬)
+        // SQL 안의 ? 로 ORDER BY 를 작성하게 되면 DB 가 문자열로 인식해서
+        // 정렬이 되지 않는 상황을 알게 되었다.
+        String sql = "SELECT l.lecture_id, l.title, m.nickname AS instructor_name, " +
+                "l.view_count, l.like_count " +
+                "FROM lectures l " +
+                "JOIN members m ON l.instructor_id = m.member_id " +
+                "WHERE l.category_id = ? AND l.is_deleted = FALSE " +
+                "ORDER BY " + orderBy;
+
+        // DB 3총사
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, categoryId);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String[] row = {
+                        String.valueOf(rs.getInt("lecture_id")),
+                        rs.getString("title"),
+                        rs.getString("instructor_name"),
+                        String.valueOf(rs.getInt("view_count")),
+                        String.valueOf(rs.getInt("like_count"))
+                };
+                list.add(row);
+            }
+        } catch (Exception e) {
+            System.out.println("강의 정렬 조회 실패: " + e.getMessage());
+        } finally {
+            DBConnection.close(rs, pstmt, conn);
+        }
+        return list;
+    }
+
+    // 7. 키워드 검색
+
+    /* comment.
+        <역할>
+        사용자가 입력한 키워드로 강의를 검색하는 역할.
+        LIKE SQL 쿼리문을 통해서 제목에 키워드가 포함된 강의를 전부 검색한다.
+        여기에 정렬까지 같이 붙어있어서 검색 + 정렬을 동시에 진행한다.
+        <영향>
+        ContentInputView.inputKeyword()
+        ContentController.searchLectures()
+        ContentDAO.searchLectures()
+        ContentOutputView.showLectures() / 기존 출력 재사용
+        InputValidator 가 여기서 처음 사용된다.
+        빈값이나 특수문자만 입력하면 DB 까지 가지 않고 막아버리는 역할이다.
+     */
+
+    public List<String[]> searchLectures(String keyword, String sortType) {
+        List<String[]> list = new ArrayList<>();
+
+        // switch 구문을 사용해서 3가지 선택지를 준다.
+        String orderBy;
+        switch (sortType) {
+            case "2": orderBy = "l.view_count DESC"; break;
+            case "3": orderBy = "l.like_count DESC"; break;
+            default:  orderBy = "l.created_at DESC"; break;
+        }
+
+        // SQL 쿼리문 (정렬과 검색을 동시에 하기 때문에 ORDER BY 구문이 있다)
+        String sql = "SELECT l.lecture_id, l.title, m.nickname AS instructor_name, " +
+                "l.view_count, l.like_count " +
+                "FROM lectures l " +
+                "JOIN members m ON l.instructor_id = m.member_id " +
+                "WHERE l.title LIKE ? AND l.is_deleted = FALSE " +
+                "ORDER BY " + orderBy;
+
+        // DB 3총사
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        // 예외 처리를 위해 try-catch 구문 작성
+        try {
+            conn = DBConnection.getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, "%" + keyword + "%");
+            rs = pstmt.executeQuery();
+
+            // while 반복문을 통해서 다음 내용이 있으면 계속 반복하는 내용을 진행
+            while (rs.next()) {
+                String[] row = {
+                        String.valueOf(rs.getInt("lecture_id")),
+                        rs.getString("title"),
+                        rs.getString("instructor_name"),
+                        String.valueOf(rs.getInt("view_count")),
+                        String.valueOf(rs.getInt("like_count"))
+                };
+                // 리스트에 추가
+                list.add(row);
+            }
+            // Error 발생을 확인하기 위해 사용
+        } catch (Exception e) {
+            System.out.println("강의 검색 실패: " + e.getMessage());
+            // 사용한 리소스 자원 정리
+        } finally {
+            DBConnection.close(rs, pstmt, conn);
+        }
+        return list;
+    }
+
 }
