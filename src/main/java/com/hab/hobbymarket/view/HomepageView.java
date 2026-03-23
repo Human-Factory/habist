@@ -1,6 +1,7 @@
 package com.hab.hobbymarket.view;
 
 import com.hab.hobbymarket.controller.ContentController;
+import com.hab.hobbymarket.view.inquiryview.InquiryInputView;
 import com.hab.hobbymarket.session.SessionManager;
 import com.hab.hobbymarket.view.adminview.AdminInputView;
 import com.mysql.cj.log.Log;
@@ -12,15 +13,17 @@ import com.hab.global.utils.ScannerUtil;
 
 public class HomepageView {
 
-    public HomepageView(ContentController content,MypageView mypageView) {
+    public HomepageView(ContentController content,MypageView mypageView, InquiryInputView inquiryInputView) {
         this.content = content;
-        this.mypageView = mypageView; // 받아서 저장
+        this.mypageView = mypageView;
+        this.inquiryInputView = inquiryInputView; // 받아서 저장
     }
 
     private static final Logger log = LoggerFactory.getLogger(HomepageView.class);
     LoginView loginView = new LoginView();
     ContentController content;
     MypageView mypageView;
+    InquiryInputView inquiryInputView;
     Scanner sc = ScannerUtil.getInstance();
 
     // 사용자 페이지
@@ -32,7 +35,8 @@ public class HomepageView {
             System.out.println("===========================");
             System.out.println("1. 강의 조회");
             System.out.println("2. 마이페이지");
-            System.out.println("3. 로그아웃");
+            System.out.println("3. 문의하기");
+            System.out.println("4. 로그아웃");
             System.out.println("0. 종료");
             System.out.println("===========================");
             System.out.print("메뉴를 선택해주세요 : ");
@@ -45,7 +49,9 @@ public class HomepageView {
 
                 case "2" -> mypageView.displayMyPageMenu();
 
-                case "3" -> {
+                case "3" -> inquiryInputView.displayInquiryWrite();
+
+                case "4" -> {
                     System.out.println("로그아웃 합니다");
                     loginView.logout();
                     return;
