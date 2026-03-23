@@ -43,26 +43,38 @@ public class MyInfomationInputView {
                 case "1" ->{
                     String nickname = member.getNickname();
                     System.out.println("변경할 닉네임을 입력해주십시오(현재 닉네임 :"+ nickname + ") : ");
+                    System.out.println("0. 뒤로가기");
                     String newNickname = sc.nextLine();
-                    myInformationController.updateNickname(newNickname);
+                    if (!newNickname.equals("0")) {
+                        myInformationController.updateNickname(newNickname);
+                    }
                 }
                 case "2" ->{
                     String email = member.getEmail();
                     System.out.println("변경할 이메일을 입력해주십시오(현재 이메일 :"+ email + ") : ");
+                    System.out.println("0. 뒤로가기");
                     String newEmail = sc.nextLine();
-                    myInformationController.updateEmail(newEmail);
+                    if (!newEmail.equals("0")) {
+                        myInformationController.updateEmail(newEmail);
+                    }
                 }
                 case "3" ->{
                     String phone = member.getPhone();
                     System.out.println("변경할 전화번호를 입력해주십시오(현재 전화번호 :"+ phone + ") : ");
+                    System.out.println("0. 뒤로가기");
                     String newPhone = sc.nextLine();
-                    myInformationController.updatePhone(newPhone);
+                    if (!newPhone.equals("0")) {
+                        myInformationController.updatePhone(newPhone);
+                    }
                 }
                 case "4" -> {
                     // password 는 비밀번호 검증 단계에서 이미 가져옴
                     System.out.println("변경할 비밀번호를 입력해주십시오(현재 비밀번호 :"+ password + ") : ");
+                    System.out.println("0. 뒤로가기");
                     String newPassword = sc.nextLine();
-                    myInformationController.updatePassword(newPassword);
+                    if (!newPassword.equals("0")) {
+                        myInformationController.updatePassword(newPassword);
+                    }
                 }
                 case "0" -> { return; }
             }
