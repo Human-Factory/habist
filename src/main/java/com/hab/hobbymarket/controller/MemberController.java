@@ -2,6 +2,7 @@ package com.hab.hobbymarket.controller;
 
 import com.hab.hobbymarket.model.MemberSignUpRequest;
 import com.hab.hobbymarket.service.MemberService;
+import com.hab.hobbymarket.session.SessionManager;
 import com.hab.hobbymarket.view.memberview.MemberInputView;
 import com.hab.hobbymarket.view.memberview.MemberOutputView;
 
@@ -29,16 +30,25 @@ public class MemberController {
         memberService.signUp(request);
     }
 
-    public void deleteMember(int memberId) {
+    public void deleteMember() {
+        if (!memberInputView.confirmDelete()) {
+            System.out.println("회원 탈퇴가 취소되었습니다.");
+            return;
+        }
 
-        // Service 호출
-        boolean result = memberService.deleteMember(memberId);
+        if (SessionManager.getCurrentUser() == null) {
+            System.out.println("로그인이 필요합니다.");
+            return;
+        }
 
-        // 결과 출력
+        Long memberId = SessionManager.getCurrentUser().getMemberId();
+        boolean result = memberService.deleteMember(memberId.intValue());
+
         if (result) {
             System.out.println("회원 탈퇴 완료");
+            SessionManager.clear();
         } else {
-            System.out.println("이미 탈퇴했거나 존재하지 않는 회원입니다.");
+            System.out.println("회원 탈퇴에 실패했습니다.");
         }
     }
-}    
+}

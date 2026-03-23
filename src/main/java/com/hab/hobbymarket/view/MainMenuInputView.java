@@ -59,7 +59,7 @@ public class MainMenuInputView {
                         memberController.signUp();
                         break;
                     case "2":
-                        memberController.deactivateMember();
+                        memberController.deleteMember();
                         break;
                     case "3":
                         loginView.login();
