@@ -40,4 +40,30 @@ public class ContentOutputView {
     public void showError(String message) {
         System.out.println("[오류] " + message);
     }
+
+    // 강의 상세 정보 출력
+
+    /* comment. <역할>
+        1. DAO 의 getLectureDetail() 반환값을 그대로 받는 역할
+        2. null 값 체크하기 / 존재하지 않는 강의 ID가 생겼을 시 기존 showError() 재사용
+        3. lecture 0~6 순서는 DAO에서 잡아놓은 배열 인덱스와 1 대 1 매치
+     */
+
+    public void showLectureDetail(String[] lecture) {
+        // 만약 lecture 에 아무것도 없다면
+        if (lecture == null) {
+            showError("존재하지 않는 강의입니다.");
+            return;
+        }
+
+        // 강의 상세 정보 출력해서 유저에게 보여주기
+        System.out.println("\n=== 강의 상세 정보 ===");
+        System.out.printf("강의 번호  : %s\n", lecture[0]);
+        System.out.printf("제    목  : %s\n", lecture[1]);
+        System.out.printf("카테고리  : %s\n", lecture[6]);
+        System.out.printf("강    사  : %s\n", lecture[3]);
+        System.out.printf("설    명  : %s\n", lecture[2]);
+        System.out.printf("조 회 수  : %s\n", lecture[4]);
+        System.out.printf("좋아요수  : %s\n", lecture[5]);
+    }
 }

@@ -2,22 +2,24 @@ package com.hab.hobbymarket.model;
 
 import java.security.Timestamp;
 
-public class Enrollement {
-
-    // Enrollment 변수 생성
-    private int enrollmentId;
-    private int memberId;
-    private int lectureId;
-    private int progressPercent;
-    private String lastPosition;
-    private Timestamp enrolledAt; // 날짜 / 시간 컬럼 생성
+public class Enrollment {
 
 
-    // Enrollment의 생성자, getter 및 setter, toString() 생성
-    public Enrollement(int enrollmentId, int memberId, int lectureId, int progressPercent, String lastPosition, Timestamp enrolledAt) {
+    private int enrollmentId;     // 수강 번호
+    private int memberId;         // 회원 번호
+    private int lectureId;        // 강의 번호
+    private String lectureTitle;  // 강의 제목
+    private int progressPercent;  // 학습 진척도
+    private String lastPosition;  // 마지막 학습 위치
+    private Timestamp enrolledAt; // 수강 시작일
+
+    public Enrollment(int enrollmentId, int memberId, int lectureId, String title, int progressPercent, String lastPosition, java.sql.Timestamp enrolledAt) {}
+
+    public Enrollment(int enrollmentId, int memberId, int lectureId, String lectureTitle, int progressPercent, String lastPosition, Timestamp enrolledAt) {
         this.enrollmentId = enrollmentId;
         this.memberId = memberId;
         this.lectureId = lectureId;
+        this.lectureTitle = lectureTitle;
         this.progressPercent = progressPercent;
         this.lastPosition = lastPosition;
         this.enrolledAt = enrolledAt;
@@ -47,6 +49,14 @@ public class Enrollement {
         this.lectureId = lectureId;
     }
 
+    public String getLectureTitle() {
+        return lectureTitle;
+    }
+
+    public void setLectureTitle(String lectureTitle) {
+        this.lectureTitle = lectureTitle;
+    }
+
     public int getProgressPercent() {
         return progressPercent;
     }
@@ -73,10 +83,11 @@ public class Enrollement {
 
     @Override
     public String toString() {
-        return "Enrollemnt{" +
+        return "Enrollement{" +
                 "enrollmentId=" + enrollmentId +
                 ", memberId=" + memberId +
                 ", lectureId=" + lectureId +
+                ", lectureTitle='" + lectureTitle + '\'' +
                 ", progressPercent=" + progressPercent +
                 ", lastPosition='" + lastPosition + '\'' +
                 ", enrolledAt=" + enrolledAt +

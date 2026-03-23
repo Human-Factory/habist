@@ -31,11 +31,11 @@ public class HomepageView {
 
             switch (no) {
                 case "1" ->
-                        content.showLecturesByCategory();
+                    content.showLecturesByCategory();
 
 
 //                case "2" ->
-                // 마이페이지 기능 추가 예정
+                        // 마이페이지 기능 추가 예정
 
                 case "3" -> {
                     System.out.println("로그아웃 합니다");
