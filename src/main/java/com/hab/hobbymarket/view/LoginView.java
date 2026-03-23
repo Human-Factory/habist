@@ -47,5 +47,6 @@ public class LoginView {
 
     public void logout() {
         loginController.logout();
+        System.out.println("로그아웃 되었습니다.");
     }
 }
