@@ -1,16 +1,15 @@
 package com.hab.hobbymarket;
 
 import com.hab.global.config.DBConnection;
-import com.hab.hobbymarket.controller.EnrollmentController;
-import com.hab.hobbymarket.controller.MemberController;
-import com.hab.hobbymarket.controller.SubscriptionController;
-import com.hab.hobbymarket.controller.WishlistController;
+import com.hab.hobbymarket.controller.*;
 import com.hab.hobbymarket.service.EnrollmentService;
 import com.hab.hobbymarket.service.MemberService;
 import com.hab.hobbymarket.service.SubscriptionService;
 import com.hab.hobbymarket.service.WishlistService;
+import com.hab.hobbymarket.view.HomepageView;
 import com.hab.hobbymarket.view.LoginView;
 import com.hab.hobbymarket.view.MainMenuInputView;
+import com.hab.hobbymarket.view.contentview.ContentInputView;
 import com.hab.hobbymarket.view.enrollmentview.EnrollmentInputView;
 import com.hab.hobbymarket.view.memberview.MemberInputView;
 import com.hab.hobbymarket.view.subscriptionview.SubscriptionInputView;
@@ -130,7 +129,20 @@ public class Application {
             WishlistInputView wishlistInputView = new WishlistInputView(wishlistController);
 
             // ============================================================
-            // 7. 메인 메뉴 조립
+            // 7. Content 기능 조립
+            // ============================================================
+            // 강의 조회 관련 기능
+            // Service 없이 Controller만 생성!
+            ContentController contentController = new ContentController();
+            ContentInputView contentInputView = new ContentInputView();
+
+            // ============================================================
+            // 8. 홈페이지 조립
+            // ============================================================
+            HomepageView homepageView = new HomepageView();
+
+            // ============================================================
+            // 9. 메인 메뉴 조립
             // ============================================================
             // 메인 메뉴에서 회원가입 / 로그인 / 관심목록 메뉴 진입 흐름을 담당
             MainMenuInputView mainMenuInputView = new MainMenuInputView(
@@ -138,17 +150,18 @@ public class Application {
                     enrollmentInputView,
                     subscriptionInputView,
                     wishlistInputView,
-                    loginView
+                    loginView,
+                    homepageView
             );
 
             // ============================================================
-            // 8. 프로그램 시작
+            // 10. 프로그램 시작
             // ============================================================
             mainMenuInputView.displayMainMenu();
 
         } finally {
             // ============================================================
-            // 9. 프로그램 종료 시 DB 연결 닫기
+            // 11. 프로그램 종료 시 DB 연결 닫기
             // ============================================================
             DBConnection.close(con);
         }
