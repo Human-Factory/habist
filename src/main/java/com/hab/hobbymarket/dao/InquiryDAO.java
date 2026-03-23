@@ -59,4 +59,25 @@ public class InquiryDAO {
 
         return list; // 리스트 반환
     }
+    // INSERT 쿼리 작성
+    public boolean save(Long memberId, String title, String content) {
+
+        String sql = "INSERT INTO inquiries (member_id, title, content) VALUES (?, ?, ?)";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // ? 자리에 값 넣기
+            pstmt.setLong(1, memberId);   // 첫 번째 ?
+            pstmt.setString(2, title);    // 두 번째 ?
+            pstmt.setString(3, content);  // 세 번째 ?
+
+            // INSERT 실행 → 성공하면 true
+            return pstmt.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            System.out.println("문의 등록 실패: " + e.getMessage());
+            return false;
+        }
+    }
 }

@@ -79,6 +79,7 @@ public class MypageView {
                 case "7" -> instructorController.apply(member.getMemberId());
 
                 case "8" -> memberInputView.confirmDelete();
+
                 case "0" -> { return; }
             }
         }

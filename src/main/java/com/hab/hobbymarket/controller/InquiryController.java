@@ -22,4 +22,17 @@ public class InquiryController {
         return inquiryService.getMyInquiries();
     }
 
+    // 추가할 save()
+    public boolean save(String title, String content) {
+        boolean result = inquiryService.save(title, content); // Service 호출
+
+        // 결과에 따라 메시지 출력
+        if (result) {
+            System.out.println("✅ 문의가 등록되었습니다.");
+        } else {
+            System.out.println("🚨 문의 등록에 실패했습니다.");
+        }
+        return result;
+    }
+
 }

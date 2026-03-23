@@ -20,4 +20,10 @@ public class InquiryService {
         return inquiryDAO.findByMemberId(memberId);
 
     }
+
+    public boolean save(String title, String content) {
+        Long memberId = SessionManager.getCurrentUser().getMemberId(); // memberId 가져오기
+        return inquiryDAO.save(memberId, title, content);              // DAO 호출
+    }
+
 }

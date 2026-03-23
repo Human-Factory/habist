@@ -112,7 +112,7 @@ public class Application {
             // ============================================================
             // 13. 홈페이지 조립
             // ============================================================
-            HomepageView homepageView = new HomepageView(contentController, mypageView);
+            HomepageView homepageView = new HomepageView(contentController, mypageView, inquiryInputView);
 
 
 
