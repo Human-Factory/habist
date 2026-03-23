@@ -47,8 +47,8 @@ public class MainMenuInputView {
 
             if (!SessionManager.isLoggedIn()) {
                 System.out.println("1. 회원가입");
-                System.out.println("2. 회원 탈퇴");
-                System.out.println("3. 로그인");
+                System.out.println("2. 로그인");
+                System.out.println("3. 비밀번호 재설정");
                 System.out.println("0. 종료");
                 System.out.print("선택: ");
 
@@ -59,10 +59,10 @@ public class MainMenuInputView {
                         memberController.signUp();
                         break;
                     case "2":
-                        memberController.deleteMember();
+                        loginView.login();
                         break;
                     case "3":
-                        loginView.login();
+                        memberController.resetPassword();
                         break;
                     case "0":
                         System.out.println("프로그램 종료");
@@ -73,6 +73,7 @@ public class MainMenuInputView {
 
             } else {
                 System.out.println("1. 로그아웃");
+                System.out.println("2. 회원탈퇴"); // 임시
                 System.out.println("0. 종료");
                 System.out.print("선택: ");
 
@@ -82,6 +83,8 @@ public class MainMenuInputView {
                     case "1":
                         loginView.logout();
                         break;
+                    case "2":
+                        memberController.deleteMember();
                     case "0":
                         System.out.println("프로그램 종료");
                         return;

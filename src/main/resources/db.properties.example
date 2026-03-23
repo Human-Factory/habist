@@ -3,5 +3,5 @@
 # 본인 DB 정보로 수정해서 사용하세요.
 
 db.url=jdbc:mysql://127.0.0.1:3306/hobbymarket
-db.user=본인DB계정
-db.password=본인DB비밀번호
+db.user=lms_user
+db.password=lms1234!

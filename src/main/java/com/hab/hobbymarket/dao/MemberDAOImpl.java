@@ -256,4 +256,34 @@ public class MemberDAOImpl implements MemberDAO {
         return result;
     }
 
+    @Override
+    public boolean updatePassword(String loginId, String name, String newPassword) {
+
+        // 아이디와 이름이 일치하는 회원의 비밀번호를 변경하는 SQL
+        String sql = "UPDATE members SET password = ? WHERE login_id = ? AND name = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // 새 비밀번호
+            pstmt.setString(1, newPassword);
+
+            // 본인 확인용 아이디
+            pstmt.setString(2, loginId);
+
+            // 본인 확인용 이름
+            pstmt.setString(3, name);
+
+            // UPDATE 실행
+            int result = pstmt.executeUpdate();
+
+            // 수정된 행이 1개 이상이면 성공
+            return result > 0;
+
+        } catch (Exception e) {
+            System.out.println("비밀번호 변경 실패: " + e.getMessage());
+            return false;
+        }
+    }
+
 }
