@@ -1,0 +1,238 @@
+Index: src/main/java/com/hab/hobbymarket/view/EnrollmentView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/hab/hobbymarket/view/EnrollmentView.java b/src/main/java/com/hab/hobbymarket/view/enrollmentview/EnrollmentInputView.java
+rename from src/main/java/com/hab/hobbymarket/view/EnrollmentView.java
+rename to src/main/java/com/hab/hobbymarket/view/enrollmentview/EnrollmentInputView.java
+--- a/src/main/java/com/hab/hobbymarket/view/EnrollmentView.java	(revision 7f42af92dcc13f245bfccd8796665dab55fde29b)
++++ b/src/main/java/com/hab/hobbymarket/view/enrollmentview/EnrollmentInputView.java	(date 1773884856739)
+@@ -1,4 +1,4 @@
+-package com.hab.hobbymarket.view;
++package com.hab.hobbymarket.view.enrollmentview;
+ 
+-public class EnrollmentView {
++public class EnrollmentInputView {
+ }
+Index: src/main/java/com/hab/hobbymarket/view/wishlistview/WishlistOutputView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/hab/hobbymarket/view/wishlistview/WishlistOutputView.java b/src/main/java/com/hab/hobbymarket/view/wishlistview/WishlistOutputView.java
+new file mode 100644
+--- /dev/null	(date 1773884815542)
++++ b/src/main/java/com/hab/hobbymarket/view/wishlistview/WishlistOutputView.java	(date 1773884815542)
+@@ -0,0 +1,4 @@
++package com.hab.hobbymarket.view.wishlistview;
++
++public class WishlistOutputView {
++}
+Index: src/main/java/com/hab/hobbymarket/view/WishlistView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/hab/hobbymarket/view/WishlistView.java b/src/main/java/com/hab/hobbymarket/view/wishlistview/WishlistInputView.java
+rename from src/main/java/com/hab/hobbymarket/view/WishlistView.java
+rename to src/main/java/com/hab/hobbymarket/view/wishlistview/WishlistInputView.java
+--- a/src/main/java/com/hab/hobbymarket/view/WishlistView.java	(revision 7f42af92dcc13f245bfccd8796665dab55fde29b)
++++ b/src/main/java/com/hab/hobbymarket/view/wishlistview/WishlistInputView.java	(date 1773884856772)
+@@ -1,4 +1,4 @@
+-package com.hab.hobbymarket.view;
++package com.hab.hobbymarket.view.wishlistview;
+ 
+-public class WishlistView {
++public class WishlistInputView {
+ }
+Index: src/main/java/com/hab/hobbymarket/view/SubscriptionView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/hab/hobbymarket/view/SubscriptionView.java b/src/main/java/com/hab/hobbymarket/view/subscriptionview/SubscriptionInputView.java
+rename from src/main/java/com/hab/hobbymarket/view/SubscriptionView.java
+rename to src/main/java/com/hab/hobbymarket/view/subscriptionview/SubscriptionInputView.java
+--- a/src/main/java/com/hab/hobbymarket/view/SubscriptionView.java	(revision 7f42af92dcc13f245bfccd8796665dab55fde29b)
++++ b/src/main/java/com/hab/hobbymarket/view/subscriptionview/SubscriptionInputView.java	(date 1773884856772)
+@@ -1,4 +1,4 @@
+-package com.hab.hobbymarket.view;
++package com.hab.hobbymarket.view.subscriptionview;
+ 
+-public class SubscriptionView {
++public class SubscriptionInputView {
+ }
+Index: src/main/java/com/hab/hobbymarket/view/MemberView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/hab/hobbymarket/view/MemberView.java b/src/main/java/com/hab/hobbymarket/view/memberview/MemberInputView.java
+rename from src/main/java/com/hab/hobbymarket/view/MemberView.java
+rename to src/main/java/com/hab/hobbymarket/view/memberview/MemberInputView.java
+--- a/src/main/java/com/hab/hobbymarket/view/MemberView.java	(revision 7f42af92dcc13f245bfccd8796665dab55fde29b)
++++ b/src/main/java/com/hab/hobbymarket/view/memberview/MemberInputView.java	(date 1773884856755)
+@@ -1,4 +1,4 @@
+-package com.hab.hobbymarket.view;
++package com.hab.hobbymarket.view.memberview;
+ 
+-public class MemberView {
++public class MemberInputView {
+ }
+Index: src/main/java/com/hab/hobbymarket/Application.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.hab.hobbymarket;\r\n\r\nimport java.util.Scanner;\r\n\r\npublic class Application {\r\n    public static void main(String[] args) {\r\n\r\n        while (true) {\r\n\r\n            Register rgst = new Register();\r\n            Login login = new Login();\r\n\r\n            Scanner sc = new Scanner(System.in);\r\n            System.out.println(\"안녕하세요 하비스입니다.\");\r\n            System.out.println(\"1.로그인\");\r\n            System.out.println(\"2.회원가입\");\r\n            String no = sc.nextLine();\r\n            if (no == \"1\") {\r\n                while (true) {\r\n\r\n\r\n                    System.out.println(\"로그인을 해주십시오\");\r\n                    System.out.println(\"아이디를 입력해주십시오 :\");\r\n                    String id= sc.nextLine();\r\n                    System.out.println(\"비밀번호를 입력해주십시오 :\");\r\n                    String pwd = sc.nextLine();\r\n\r\n\r\n                    if (login.login(id,pwd) == false) {\r\n                        System.out.println(\"아이디와 비밀번호를 확인해주십시오\");\r\n                        return;\r\n                    } else {\r\n                        break;\r\n                    }\r\n                }\r\n            } else if (no == \"2\") {\r\n                System.out.println(\"회원가입\");\r\n\r\n                while (true) {\r\n                    System.out.println(\"이름을 입력해주십시오 :\");\r\n                    String name = sc.nextLine();\r\n                    if (rgst.registerName(name) == true) {\r\n                        break;\r\n                    } else {\r\n                        System.out.println(\"이름을 다시 입력하여 주십시오\");\r\n                        return;\r\n                    }\r\n                }\r\n\r\n                while (true) {\r\n                    System.out.println(\"아이디를 입력해주십시오 :\");\r\n                    String id = sc.nextLine();\r\n                    if (rgst.registerId(id) == true) {\r\n                        break;\r\n                    } else {\r\n                        System.out.println(\"아이디를 다시 입력하여 주십시오\");\r\n                        return;\r\n                    }\r\n                }\r\n\r\n                while (true) {\r\n                    System.out.println(\"비밀번호를 입력해주십시오 :\");\r\n                    String pwd = sc.nextLine();\r\n                    if (rgst.registerPwd(pwd) == true) {\r\n                        break;\r\n                    } else {\r\n                        System.out.println(\"비밀번호를 다시 입력하여 주십시오\");\r\n                        return;\r\n                    }\r\n                }\r\n\r\n                while (true) {\r\n                    System.out.println(\"닉네임을 입력해주십시오 :\");\r\n                    String nick = sc.nextLine();\r\n                    if (rgst.registerNick(nick) == true) {\r\n                        break;\r\n                    } else {\r\n                        System.out.println(\"닉네임을 다시 입력하여 주십시오\");\r\n                        return;\r\n                    }\r\n                }\r\n\r\n                while (true) {\r\n                    System.out.println(\"전화번호를 입력해주십시오 :\");\r\n                    String num = sc.nextLine();\r\n                    if (rgst.registerNum(num) == true) {\r\n                        break;\r\n                    } else {\r\n                        System.out.println(\"전화번호를 다시 입력하여 주십시오\");\r\n                        return;\r\n                    }\r\n                }\r\n\r\n            }else if ((no != \"1\") && (no != \"2\")){\r\n                System.out.println(\"번호를 제대로 입력해주십시오\");\r\n                return;\r\n            }else {\r\n                break;\r\n            }\r\n\r\n        }\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/hab/hobbymarket/Application.java b/src/main/java/com/hab/hobbymarket/Application.java
+--- a/src/main/java/com/hab/hobbymarket/Application.java	(revision 7f42af92dcc13f245bfccd8796665dab55fde29b)
++++ b/src/main/java/com/hab/hobbymarket/Application.java	(date 1773884856724)
+@@ -5,100 +5,5 @@
+ public class Application {
+     public static void main(String[] args) {
+ 
+-        while (true) {
+-
+-            Register rgst = new Register();
+-            Login login = new Login();
+-
+-            Scanner sc = new Scanner(System.in);
+-            System.out.println("안녕하세요 하비스입니다.");
+-            System.out.println("1.로그인");
+-            System.out.println("2.회원가입");
+-            String no = sc.nextLine();
+-            if (no == "1") {
+-                while (true) {
+-
+-
+-                    System.out.println("로그인을 해주십시오");
+-                    System.out.println("아이디를 입력해주십시오 :");
+-                    String id= sc.nextLine();
+-                    System.out.println("비밀번호를 입력해주십시오 :");
+-                    String pwd = sc.nextLine();
+-
+-
+-                    if (login.login(id,pwd) == false) {
+-                        System.out.println("아이디와 비밀번호를 확인해주십시오");
+-                        return;
+-                    } else {
+-                        break;
+-                    }
+-                }
+-            } else if (no == "2") {
+-                System.out.println("회원가입");
+-
+-                while (true) {
+-                    System.out.println("이름을 입력해주십시오 :");
+-                    String name = sc.nextLine();
+-                    if (rgst.registerName(name) == true) {
+-                        break;
+-                    } else {
+-                        System.out.println("이름을 다시 입력하여 주십시오");
+-                        return;
+-                    }
+-                }
+-
+-                while (true) {
+-                    System.out.println("아이디를 입력해주십시오 :");
+-                    String id = sc.nextLine();
+-                    if (rgst.registerId(id) == true) {
+-                        break;
+-                    } else {
+-                        System.out.println("아이디를 다시 입력하여 주십시오");
+-                        return;
+-                    }
+-                }
+-
+-                while (true) {
+-                    System.out.println("비밀번호를 입력해주십시오 :");
+-                    String pwd = sc.nextLine();
+-                    if (rgst.registerPwd(pwd) == true) {
+-                        break;
+-                    } else {
+-                        System.out.println("비밀번호를 다시 입력하여 주십시오");
+-                        return;
+-                    }
+-                }
+-
+-                while (true) {
+-                    System.out.println("닉네임을 입력해주십시오 :");
+-                    String nick = sc.nextLine();
+-                    if (rgst.registerNick(nick) == true) {
+-                        break;
+-                    } else {
+-                        System.out.println("닉네임을 다시 입력하여 주십시오");
+-                        return;
+-                    }
+-                }
+-
+-                while (true) {
+-                    System.out.println("전화번호를 입력해주십시오 :");
+-                    String num = sc.nextLine();
+-                    if (rgst.registerNum(num) == true) {
+-                        break;
+-                    } else {
+-                        System.out.println("전화번호를 다시 입력하여 주십시오");
+-                        return;
+-                    }
+-                }
+-
+-            }else if ((no != "1") && (no != "2")){
+-                System.out.println("번호를 제대로 입력해주십시오");
+-                return;
+-            }else {
+-                break;
+-            }
+-
+-        }
+-
+-    }
+-}
++    }
++}
+\ No newline at end of file
+Index: src/main/java/com/hab/hobbymarket/view/enrollmentview/EnrollmentOutputView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/hab/hobbymarket/view/enrollmentview/EnrollmentOutputView.java b/src/main/java/com/hab/hobbymarket/view/enrollmentview/EnrollmentOutputView.java
+new file mode 100644
+--- /dev/null	(date 1773884741935)
++++ b/src/main/java/com/hab/hobbymarket/view/enrollmentview/EnrollmentOutputView.java	(date 1773884741935)
+@@ -0,0 +1,4 @@
++package com.hab.hobbymarket.view.enrollmentview;
++
++public class EnrollmentOutputView {
++}
+Index: src/main/java/com/hab/hobbymarket/view/subscriptionview/SubscriptionOutputView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/hab/hobbymarket/view/subscriptionview/SubscriptionOutputView.java b/src/main/java/com/hab/hobbymarket/view/subscriptionview/SubscriptionOutputView.java
+new file mode 100644
+--- /dev/null	(date 1773884784029)
++++ b/src/main/java/com/hab/hobbymarket/view/subscriptionview/SubscriptionOutputView.java	(date 1773884784029)
+@@ -0,0 +1,4 @@
++package com.hab.hobbymarket.view.subscriptionview;
++
++public class SubscriptionOutputView {
++}
+Index: src/main/java/com/hab/hobbymarket/view/memberview/MemberOutputView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/hab/hobbymarket/view/memberview/MemberOutputView.java b/src/main/java/com/hab/hobbymarket/view/memberview/MemberOutputView.java
+new file mode 100644
+--- /dev/null	(date 1773884760583)
++++ b/src/main/java/com/hab/hobbymarket/view/memberview/MemberOutputView.java	(date 1773884760583)
+@@ -0,0 +1,4 @@
++package com.hab.hobbymarket.view.memberview;
++
++public class MemberOutputView {
++}

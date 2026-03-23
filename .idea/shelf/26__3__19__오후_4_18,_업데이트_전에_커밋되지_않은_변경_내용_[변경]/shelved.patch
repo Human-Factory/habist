@@ -1,0 +1,98 @@
+Index: src/main/java/com/hab/hobbymarket/Application.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.hab.hobbymarket;\r\n\r\nimport com.hab.global.config.DBConnection;\r\nimport com.hab.hobbymarket.controller.ContentController;\r\nimport com.hab.hobbymarket.controller.EnrollmentController;\r\nimport com.hab.hobbymarket.controller.MemberController;\r\nimport com.hab.hobbymarket.controller.SubscriptionController;\r\nimport com.hab.hobbymarket.controller.WishlistController;\r\nimport com.hab.hobbymarket.service.EnrollmentService;\r\nimport com.hab.hobbymarket.service.MemberService;\r\nimport com.hab.hobbymarket.service.SubscriptionService;\r\nimport com.hab.hobbymarket.service.WishlistService;\r\nimport com.hab.hobbymarket.view.MainMenuInputView;\r\nimport com.hab.hobbymarket.view.enrollmentview.EnrollmentInputView;\r\nimport com.hab.hobbymarket.view.memberview.MemberInputView;\r\nimport com.hab.hobbymarket.view.subscriptionview.SubscriptionInputView;\r\nimport com.hab.hobbymarket.view.wishlistview.WishlistInputView;\r\n\r\nimport java.sql.Connection;\r\n\r\npublic class Application {\r\n\r\n    public static void main(String[] args) {\r\n\r\n        // 1. DB 연결\r\n        Connection con = DBConnection.getConnection();\r\n        if (con == null) {\r\n            System.out.println(\"\uD83D\uDEA8 프로그램을 종료합니다.\");\r\n            return;\r\n        }\r\n        System.out.println(\"✅ DB 연결 성공!\");\r\n\r\n        // 2. Member 조립 =============================\r\n        MemberService memberService = new MemberService(con);\r\n        MemberController memberController = new MemberController(memberService);\r\n        MemberInputView memberInputView = new MemberInputView(memberController);\r\n        // ============================================\r\n\r\n        // 3. Enrollment 조립 =========================\r\n        EnrollmentService enrollmentService = new EnrollmentService(con);\r\n        EnrollmentController enrollmentController = new EnrollmentController(enrollmentService);\r\n        EnrollmentInputView enrollmentInputView = new EnrollmentInputView(enrollmentController);\r\n        // ============================================\r\n\r\n        // 4. Subscription 조립 =======================\r\n        SubscriptionService subscriptionService = new SubscriptionService(con);\r\n        SubscriptionController subscriptionController = new SubscriptionController(subscriptionService);\r\n        SubscriptionInputView subscriptionInputView = new SubscriptionInputView(subscriptionController);\r\n        // ============================================\r\n\r\n        // 5. Wishlist 조립 ===========================\r\n        WishlistService wishlistService = new WishlistService(con);\r\n        WishlistController wishlistController = new WishlistController(wishlistService);\r\n        WishlistInputView wishlistInputView = new WishlistInputView(wishlistController);\r\n        // ============================================\r\n\r\n        // 6. MainMenu 조립 (항상 가장 마지막!)\r\n        MainMenuInputView mainMenuInputView = new MainMenuInputView(\r\n                memberInputView,\r\n                enrollmentInputView,\r\n                subscriptionInputView,\r\n                wishlistInputView\r\n        );\r\n\r\n        // 7. 첫 화면 호출\r\n        mainMenuInputView.displayMainMenu();\r\n\r\n        // 8. 종료 시 DB 닫기\r\n        DBConnection.close(con);\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/hab/hobbymarket/Application.java b/src/main/java/com/hab/hobbymarket/Application.java
+--- a/src/main/java/com/hab/hobbymarket/Application.java	(revision f9f1895ec5352e97456613ac7739d3399052c169)
++++ b/src/main/java/com/hab/hobbymarket/Application.java	(date 1773903865900)
+@@ -10,6 +10,7 @@
+ import com.hab.hobbymarket.service.MemberService;
+ import com.hab.hobbymarket.service.SubscriptionService;
+ import com.hab.hobbymarket.service.WishlistService;
++import com.hab.hobbymarket.view.LoginView;
+ import com.hab.hobbymarket.view.MainMenuInputView;
+ import com.hab.hobbymarket.view.enrollmentview.EnrollmentInputView;
+ import com.hab.hobbymarket.view.memberview.MemberInputView;
+@@ -34,6 +35,7 @@
+         MemberService memberService = new MemberService(con);
+         MemberController memberController = new MemberController(memberService);
+         MemberInputView memberInputView = new MemberInputView(memberController);
++        LoginView loginView = new LoginView();
+         // ============================================
+ 
+         // 3. Enrollment 조립 =========================
+@@ -55,11 +57,13 @@
+         // ============================================
+ 
+         // 6. MainMenu 조립 (항상 가장 마지막!)
++
+         MainMenuInputView mainMenuInputView = new MainMenuInputView(
+                 memberInputView,
+                 enrollmentInputView,
+                 subscriptionInputView,
+-                wishlistInputView
++                wishlistInputView,
++                loginView
+         );
+ 
+         // 7. 첫 화면 호출
+Index: src/main/java/com/hab/hobbymarket/view/MainMenuInputView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.hab.hobbymarket.view;\r\n\r\nimport com.hab.hobbymarket.view.enrollmentview.EnrollmentInputView;\r\nimport com.hab.hobbymarket.view.memberview.MemberInputView;\r\nimport com.hab.hobbymarket.view.subscriptionview.SubscriptionInputView;\r\nimport com.hab.hobbymarket.view.wishlistview.WishlistInputView;\r\nimport java.util.Scanner;\r\n\r\npublic class MainMenuInputView {\r\n\r\n    private MemberInputView memberInputView;\r\n    private EnrollmentInputView enrollmentInputView;\r\n    private SubscriptionInputView subscriptionInputView;\r\n    private WishlistInputView wishlistInputView;\r\n    private Scanner sc = new Scanner(System.in);\r\n\r\n    public MainMenuInputView(MemberInputView memberInputView,\r\n                             EnrollmentInputView enrollmentInputView,\r\n                             SubscriptionInputView subscriptionInputView,\r\n                             WishlistInputView wishlistInputView) {\r\n        this.memberInputView = memberInputView;\r\n        this.enrollmentInputView = enrollmentInputView;\r\n        this.subscriptionInputView = subscriptionInputView;\r\n        this.wishlistInputView = wishlistInputView;\r\n    }\r\n\r\n    public void displayMainMenu() {\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/hab/hobbymarket/view/MainMenuInputView.java b/src/main/java/com/hab/hobbymarket/view/MainMenuInputView.java
+--- a/src/main/java/com/hab/hobbymarket/view/MainMenuInputView.java	(revision f9f1895ec5352e97456613ac7739d3399052c169)
++++ b/src/main/java/com/hab/hobbymarket/view/MainMenuInputView.java	(date 1773903865906)
+@@ -12,18 +12,45 @@
+     private EnrollmentInputView enrollmentInputView;
+     private SubscriptionInputView subscriptionInputView;
+     private WishlistInputView wishlistInputView;
++    private LoginView loginView;
+     private Scanner sc = new Scanner(System.in);
+ 
+     public MainMenuInputView(MemberInputView memberInputView,
+                              EnrollmentInputView enrollmentInputView,
+                              SubscriptionInputView subscriptionInputView,
+-                             WishlistInputView wishlistInputView) {
++                             WishlistInputView wishlistInputView,
++                             LoginView loginView) {
+         this.memberInputView = memberInputView;
+         this.enrollmentInputView = enrollmentInputView;
+         this.subscriptionInputView = subscriptionInputView;
+         this.wishlistInputView = wishlistInputView;
++        this.loginView = loginView;
+     }
+ 
+     public void displayMainMenu() {
++        while (true) {
++            System.out.println("\n===========================");
++            System.out.println("    🎯 하비스에 오신걸 환영합니다!");
++            System.out.println("===========================");
++            System.out.println("1. 로그인");
++            System.out.println("2. 회원가입");
++            System.out.println("3. 회원 탈퇴");
++            System.out.println("0. 종료");
++            System.out.println("===========================");
++            System.out.print("메뉴를 선택해주세요 : ");
++
++            String no = sc.nextLine().trim();
++
++            switch (no) {
++                case "1" -> loginView.login();
++                case "2" -> memberInputView.getSignUpInput();
++                // case "3" -> memberInputView.displayDeactivateMenu();
++                case "0" -> {
++                    System.out.println("프로그램을 종료합니다.");
++                    return;
++                }
++                default -> System.out.println("🚨 올바른 번호를 입력해주세요.");
++            }
++        }
+     }
+ }
