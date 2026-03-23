@@ -23,4 +23,8 @@ public interface MemberDAO {
     int deleteEnrollmentsByMemberId(int memberId);
     int deleteSubscriptionsByMemberId(int memberId);
     int deleteMembersByMemberId(int memberId);
+
+    // 비밀번호 변경
+    // loginId + name 이 일치하는 회원의 비밀번호를 새 비밀번호로 변경
+    boolean updatePassword(String loginId, String name, String newPassword);
 }

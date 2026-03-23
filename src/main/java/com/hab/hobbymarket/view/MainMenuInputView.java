@@ -13,18 +13,21 @@ public class MainMenuInputView {
     private SubscriptionInputView subscriptionInputView;
     private WishlistInputView wishlistInputView;
     private LoginView loginView;
+    private HomepageView homepageView;
     private Scanner sc = new Scanner(System.in);
 
     public MainMenuInputView(MemberInputView memberInputView,
                              EnrollmentInputView enrollmentInputView,
                              SubscriptionInputView subscriptionInputView,
                              WishlistInputView wishlistInputView,
-                             LoginView loginView) {
+                             LoginView loginView,
+                             HomepageView homepageView) {
         this.memberInputView = memberInputView;
         this.enrollmentInputView = enrollmentInputView;
         this.subscriptionInputView = subscriptionInputView;
         this.wishlistInputView = wishlistInputView;
         this.loginView = loginView;
+        this.homepageView = homepageView;
     }
 
     public void displayMainMenu() {
@@ -41,11 +44,16 @@ public class MainMenuInputView {
             String no = sc.nextLine().trim();
 
             switch (no) {
-                case "1" -> loginView.login();
-                case "2" -> {
-                    memberInputView.signUp();
-                    loginView.login();
+                case "1" -> {
+                    boolean isLoggedIn = loginView.login();
+                    if (isLoggedIn) {
+                        homepageView.displayHomePage();
+                    }
                 }
+
+                case "2" ->
+                    memberInputView.signUp();
+
                 case "0" -> {
                     System.out.println("프로그램을 종료합니다.");
                     return;
