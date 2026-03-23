@@ -195,7 +195,7 @@ public class NoticeDAO {
 
     /* comment.
         <역할>
-        공지사항 조회수 + 1 역할
+        공지사항 제목 + 내용 수정
         <흐름도>
         SQL 순서 - title (1번) -> content(2번) + notice_id(3번) 순서 맞춰야한다.
         updated_at 은 DB 자동 갱신
