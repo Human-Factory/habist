@@ -1,6 +1,10 @@
 package com.hab.hobbymarket;
 
 import com.hab.global.config.DBConnection;
+import com.hab.hobbymarket.controller.EnrollmentController;
+import com.hab.hobbymarket.controller.MemberController;
+import com.hab.hobbymarket.controller.SubscriptionController;
+import com.hab.hobbymarket.controller.WishlistController;
 import com.hab.hobbymarket.controller.*;
 import com.hab.hobbymarket.service.EnrollmentService;
 import com.hab.hobbymarket.service.MemberService;
