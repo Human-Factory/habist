@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
+import com.hab.global.utils.ScannerUtil;
 
 public class HomepageView {
 
@@ -18,7 +19,7 @@ public class HomepageView {
     LoginView loginView = new LoginView();
     ContentController content;
     MypageView mypageView;
-    Scanner sc = new Scanner(System.in);
+    Scanner sc = ScannerUtil.getInstance();
 
 
     public void displayHomePage() {

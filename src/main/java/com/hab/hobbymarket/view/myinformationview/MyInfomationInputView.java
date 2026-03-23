@@ -5,10 +5,11 @@ import com.hab.hobbymarket.model.Member;
 import com.hab.hobbymarket.session.SessionManager;
 
 import java.util.Scanner;
+import com.hab.global.utils.ScannerUtil;
 
 public class MyInfomationInputView {
     private MyInformationController myInformationController;
-    Scanner sc = new Scanner(System.in);
+    Scanner sc = ScannerUtil.getInstance();
 
     public MyInfomationInputView(MyInformationController myInformationController) {
         this.myInformationController = myInformationController;

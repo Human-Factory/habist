@@ -5,11 +5,12 @@ import com.hab.hobbymarket.model.MemberSignUpRequest;
 import com.hab.hobbymarket.model.PasswordResetRequest;
 
 import java.util.Scanner;
+import com.hab.global.utils.ScannerUtil;
 
 public class MemberInputView {
 
     private MemberController memberController;
-    private Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = ScannerUtil.getInstance();
 
     public MemberInputView(MemberController memberController) {
         this.memberController = memberController;
@@ -47,7 +48,7 @@ public class MemberInputView {
     }
 
     public boolean confirmDelete() {
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = ScannerUtil.getInstance();
         System.out.print("정말 탈퇴하시겠습니까? (Y/N): ");
         return sc.nextLine().equalsIgnoreCase("Y");
     }

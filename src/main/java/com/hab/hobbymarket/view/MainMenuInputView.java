@@ -5,6 +5,7 @@ import com.hab.hobbymarket.view.memberview.MemberInputView;
 import com.hab.hobbymarket.view.subscriptionview.SubscriptionInputView;
 import com.hab.hobbymarket.view.wishlistview.WishlistInputView;
 import java.util.Scanner;
+import com.hab.global.utils.ScannerUtil;
 
 public class MainMenuInputView {
 
@@ -14,7 +15,7 @@ public class MainMenuInputView {
     private WishlistInputView wishlistInputView;
     private LoginView loginView;
     private HomepageView homepageView;
-    private Scanner sc = new Scanner(System.in);
+    private Scanner sc = ScannerUtil.getInstance();
 
     public MainMenuInputView(MemberInputView memberInputView,
                              EnrollmentInputView enrollmentInputView,
