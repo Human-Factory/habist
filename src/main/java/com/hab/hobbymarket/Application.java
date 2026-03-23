@@ -92,7 +92,11 @@ public class Application {
             // ============================================================
             // 9. 마이페이지 조립
             // ============================================================
-            MypageView mypageView = new MypageView(myInfomationInputView,wishlistController,instructorController);
+            MypageView mypageView = new MypageView(
+                    myInfomationInputView,
+                    wishlistController,
+                    instructorController,
+                    enrollmentInputView);
 
             // ============================================================
             // 10. 홈페이지 조립

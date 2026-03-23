@@ -4,6 +4,7 @@ import com.hab.hobbymarket.controller.InstructorController;
 import com.hab.hobbymarket.controller.WishlistController;
 import com.hab.hobbymarket.model.Member;
 import com.hab.hobbymarket.session.SessionManager;
+import com.hab.hobbymarket.view.enrollmentview.EnrollmentInputView;
 import com.hab.hobbymarket.view.myinformationview.MyInfomationInputView;
 
 import java.util.Scanner;
@@ -13,13 +14,16 @@ public class MypageView {
     private InstructorController instructorController;
     private WishlistController wishlistController;
     private MyInfomationInputView myInfomationInputView;
+    private EnrollmentInputView enrollmentInputView;
 
     public MypageView(MyInfomationInputView myInfomationInputView,
                       WishlistController wishlistController,
-                      InstructorController instructorController) {
+                      InstructorController instructorController,
+                      EnrollmentInputView enrollmentInputView) {
         this.wishlistController = wishlistController;
         this.myInfomationInputView = myInfomationInputView;
         this.instructorController = instructorController;
+        this.enrollmentInputView = enrollmentInputView;
     }
 
     public void displayMyPageMenu() {
@@ -57,6 +61,8 @@ public class MypageView {
                     }
                 }
                 case "2" -> wishlistController.showMyWishlist();
+
+                case "3" -> enrollmentInputView.showLearningMenu();
 
                 case "7" -> instructorController.apply(member.getMemberId());
                 case "0" -> { return; }
