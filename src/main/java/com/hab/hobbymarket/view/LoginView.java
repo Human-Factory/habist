@@ -10,13 +10,9 @@ import java.util.Scanner;
 public class LoginView {
 
     private final LoginController loginController = new LoginController();
-    private final Scanner sc;
+    private final Scanner sc = new Scanner(System.in);
 
-    public LoginView(Scanner sc) {
-        this.sc = sc;
-    }
-
-    public void login() {
+    public boolean login() {
 
         while (true) {
             System.out.println("===== 로그인 =====");
@@ -32,7 +28,7 @@ public class LoginView {
             if (result == LoginResult.SUCCESS) {
                 Member user = SessionManager.getCurrentUser();
                 System.out.println(user.getNickname() + "님, 로그인 성공");
-                break;
+                return true;
             }
 
             if (result == LoginResult.INVALID_CREDENTIAL) {

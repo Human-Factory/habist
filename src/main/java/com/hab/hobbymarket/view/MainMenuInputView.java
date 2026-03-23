@@ -1,12 +1,9 @@
 package com.hab.hobbymarket.view;
 
-import com.hab.hobbymarket.controller.MemberController;
-import com.hab.hobbymarket.session.SessionManager;
 import com.hab.hobbymarket.view.enrollmentview.EnrollmentInputView;
 import com.hab.hobbymarket.view.memberview.MemberInputView;
 import com.hab.hobbymarket.view.subscriptionview.SubscriptionInputView;
 import com.hab.hobbymarket.view.wishlistview.WishlistInputView;
-
 import java.util.Scanner;
 
 public class MainMenuInputView {
@@ -16,81 +13,52 @@ public class MainMenuInputView {
     private SubscriptionInputView subscriptionInputView;
     private WishlistInputView wishlistInputView;
     private LoginView loginView;
-    private Scanner sc;
-    private MemberController memberController;
+    private HomepageView homepageView;
+    private Scanner sc = new Scanner(System.in);
 
-    public MainMenuInputView(
-            MemberInputView memberInputView,
-            EnrollmentInputView enrollmentInputView,
-            SubscriptionInputView subscriptionInputView,
-            WishlistInputView wishlistInputView,
-            LoginView loginView,
-            Scanner sc,
-            MemberController memberController
-    ) {
+    public MainMenuInputView(MemberInputView memberInputView,
+                             EnrollmentInputView enrollmentInputView,
+                             SubscriptionInputView subscriptionInputView,
+                             WishlistInputView wishlistInputView,
+                             LoginView loginView,
+                             HomepageView homepageView) {
         this.memberInputView = memberInputView;
         this.enrollmentInputView = enrollmentInputView;
         this.subscriptionInputView = subscriptionInputView;
         this.wishlistInputView = wishlistInputView;
         this.loginView = loginView;
-        this.sc = sc;
-        this.memberController = memberController;
-    }
-
-    public MainMenuInputView(MemberInputView memberInputView, EnrollmentInputView enrollmentInputView, SubscriptionInputView subscriptionInputView, WishlistInputView wishlistInputView, LoginView loginView) {
-
+        this.homepageView = homepageView;
     }
 
     public void displayMainMenu() {
         while (true) {
-            System.out.println("\n===== HABIS 메뉴 =====");
+            System.out.println("\n===========================");
+            System.out.println("    🎯 하비스에 오신걸 환영합니다!");
+            System.out.println("===========================");
+            System.out.println("1. 로그인");
+            System.out.println("2. 회원가입");
+            System.out.println("0. 종료");
+            System.out.println("===========================");
+            System.out.print("메뉴를 선택해주세요 : ");
 
-            if (!SessionManager.isLoggedIn()) {
-                System.out.println("1. 회원가입");
-                System.out.println("2. 로그인");
-                System.out.println("3. 비밀번호 재설정");
-                System.out.println("0. 종료");
-                System.out.print("선택: ");
+            String no = sc.nextLine().trim();
 
-                String input = sc.nextLine();
-
-                switch (input) {
-                    case "1":
-                        memberController.signUp();
-                        break;
-                    case "2":
-                        loginView.login();
-                        break;
-                    case "3":
-                        memberController.resetPassword();
-                        break;
-                    case "0":
-                        System.out.println("프로그램 종료");
-                        return;
-                    default:
-                        System.out.println("잘못된 입력입니다.");
+            switch (no) {
+                case "1" -> {
+                    boolean isLoggedIn = loginView.login();
+                    if (isLoggedIn) {
+                        homepageView.displayHomePage();
+                    }
                 }
 
-            } else {
-                System.out.println("1. 로그아웃");
-                System.out.println("2. 회원탈퇴"); // 임시
-                System.out.println("0. 종료");
-                System.out.print("선택: ");
+                case "2" ->
+                    memberInputView.signUp();
 
-                String input = sc.nextLine();
-
-                switch (input) {
-                    case "1":
-                        loginView.logout();
-                        break;
-                    case "2":
-                        memberController.deleteMember();
-                    case "0":
-                        System.out.println("프로그램 종료");
-                        return;
-                    default:
-                        System.out.println("잘못된 입력입니다.");
+                case "0" -> {
+                    System.out.println("프로그램을 종료합니다.");
+                    return;
                 }
+                default -> System.out.println("🚨 올바른 번호를 입력해주세요.");
             }
         }
     }
