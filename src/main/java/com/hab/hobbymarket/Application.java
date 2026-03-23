@@ -9,9 +9,11 @@ import com.hab.hobbymarket.service.WishlistService;
 import com.hab.hobbymarket.view.HomepageView;
 import com.hab.hobbymarket.view.LoginView;
 import com.hab.hobbymarket.view.MainMenuInputView;
+import com.hab.hobbymarket.view.MypageView;
 import com.hab.hobbymarket.view.contentview.ContentInputView;
 import com.hab.hobbymarket.view.enrollmentview.EnrollmentInputView;
 import com.hab.hobbymarket.view.memberview.MemberInputView;
+import com.hab.hobbymarket.view.mypageview.MypageInputView;
 import com.hab.hobbymarket.view.subscriptionview.SubscriptionInputView;
 import com.hab.hobbymarket.view.wishlistview.WishlistInputView;
 
@@ -142,7 +144,12 @@ public class Application {
             HomepageView homepageView = new HomepageView();
 
             // ============================================================
-            // 9. 메인 메뉴 조립
+            // 9. 마이페이지 조립
+            // ============================================================
+            MypageView mypageView = new MypageView();
+
+            // ============================================================
+            // 10. 메인 메뉴 조립
             // ============================================================
             // 메인 메뉴에서 회원가입 / 로그인 / 관심목록 메뉴 진입 흐름을 담당
             MainMenuInputView mainMenuInputView = new MainMenuInputView(
@@ -155,13 +162,13 @@ public class Application {
             );
 
             // ============================================================
-            // 10. 프로그램 시작
+            // 11. 프로그램 시작
             // ============================================================
             mainMenuInputView.displayMainMenu();
 
         } finally {
             // ============================================================
-            // 11. 프로그램 종료 시 DB 연결 닫기
+            // 12. 프로그램 종료 시 DB 연결 닫기
             // ============================================================
             DBConnection.close(con);
         }

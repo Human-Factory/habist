@@ -13,6 +13,7 @@ public class HomepageView {
     LoginView loginView = new LoginView();
     ContentController content = new ContentController();
     Scanner sc = new Scanner(System.in);
+    MypageView mypageView = new MypageView();
 
     public void displayHomePage() {
 
@@ -34,8 +35,7 @@ public class HomepageView {
                     content.showLecturesByCategory();
 
 
-//                case "2" ->
-                        // 마이페이지 기능 추가 예정
+                case "2" -> mypageView.displayMyPageMenu();
 
                 case "3" -> {
                     System.out.println("로그아웃 합니다");
