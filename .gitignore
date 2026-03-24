@@ -9,6 +9,7 @@ build/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+.idea/sqldialects.xml
 *.iws
 *.iml
 *.ipr
@@ -44,3 +45,7 @@ bin/
 ### DB 설정 (개인 정보 포함) ###
 src/main/java/com/hab/global/config/DBConnection.java
 src/main/resources/db.properties
+
+### 프로젝트 로컬 전용 ###
+init_data.sql
+.ai/
