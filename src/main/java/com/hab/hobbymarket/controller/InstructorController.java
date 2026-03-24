@@ -15,8 +15,10 @@ public class InstructorController {
 
     // 강의자 신청 - 로그인한 회원이 호출 (REQ-INS-001, 003)
     public void apply(Long memberId) {
-        instructorService.apply(memberId);
-        outputView.printApplySuccess();
+        boolean success = instructorService.apply(memberId);
+        if (success) {
+            outputView.printApplySuccess();
+        }
     }
 
     // 신청 목록 조회 + 승인/거절 - 관리자용 (REQ-INS-004)
