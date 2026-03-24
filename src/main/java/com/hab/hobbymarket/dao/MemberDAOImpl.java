@@ -265,19 +265,11 @@ public class MemberDAOImpl implements MemberDAO {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            // 새 비밀번호
             pstmt.setString(1, newPassword);
-
-            // 본인 확인용 아이디
             pstmt.setString(2, loginId);
-
-            // 본인 확인용 이름
             pstmt.setString(3, name);
 
-            // UPDATE 실행
             int result = pstmt.executeUpdate();
-
-            // 수정된 행이 1개 이상이면 성공
             return result > 0;
 
         } catch (Exception e) {
@@ -286,4 +278,40 @@ public class MemberDAOImpl implements MemberDAO {
         }
     }
 
+    // 닉네임으로 회원 조회 (쪽지 수신자 검색용)
+    @Override
+    public Member findByNickname(String nickname) {
+        String sql = """
+                SELECT member_id, login_id, password, nickname, name, email, phone, role, status, created_at, updated_at
+                FROM members
+                WHERE nickname = ? AND status = 'ACTIVE'
+                """;
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, nickname);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return new Member(
+                            rs.getLong("member_id"),
+                            rs.getString("login_id"),
+                            rs.getString("password"),
+                            rs.getString("nickname"),
+                            rs.getString("name"),
+                            rs.getString("email"),
+                            rs.getString("phone"),
+                            rs.getString("role"),
+                            rs.getString("status"),
+                            rs.getTimestamp("created_at").toLocalDateTime(),
+                            rs.getTimestamp("updated_at") == null ? null :
+                                    rs.getTimestamp("updated_at").toLocalDateTime()
+                    );
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("닉네임으로 회원 조회 실패: " + e.getMessage());
+        }
+        return null;
+    }
 }
