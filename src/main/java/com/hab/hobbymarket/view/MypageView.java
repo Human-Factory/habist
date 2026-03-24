@@ -87,11 +87,14 @@ public class MypageView {
                     System.out.println("이름     : " + member.getName());
                     System.out.println("이메일   : " + member.getEmail());
                     System.out.println("전화번호 : " + member.getPhone());
-                    System.out.println("0. 내 정보 수정");
+                    System.out.println("1. 내 정보 수정");
+                    System.out.println("0. 뒤로 가기");
                     String no1 = sc.nextLine();
 
-                    if (no1.equals("0")) {
+                    if (no1.equals("1")) {
                         myInfomationInputView.myinfomodify();
+                    }else {
+                        return;
                     }
                 }
                 case "3" -> wishlistController.showMyWishlist();

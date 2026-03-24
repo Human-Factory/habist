@@ -1,0 +1,7 @@
+# DB 연결 설정 예시 파일입니다.
+# 이 파일을 복사해서 db.properties 로 이름을 바꾸고
+# 본인 DB 정보로 수정해서 사용하세요.
+
+db.url=jdbc:mysql://127.0.0.1:3306/hobbymarket
+db.user=lms_user
+db.password=lms1234!
