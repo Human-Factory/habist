@@ -27,4 +27,7 @@ public interface MemberDAO {
     // 비밀번호 변경
     // loginId + name 이 일치하는 회원의 비밀번호를 새 비밀번호로 변경
     boolean updatePassword(String loginId, String name, String newPassword);
+
+    // 닉네임으로 회원 조회 (쪽지 수신자 검색용)
+    Member findByNickname(String nickname);
 }
