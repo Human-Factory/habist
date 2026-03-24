@@ -49,3 +49,4 @@ src/main/resources/db.properties
 ### 프로젝트 로컬 전용 ###
 init_data.sql
 .ai/
+.idea/dataSources.xml

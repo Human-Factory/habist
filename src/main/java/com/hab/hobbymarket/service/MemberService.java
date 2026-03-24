@@ -109,7 +109,6 @@ public class MemberService {
         }
 
         // 4. 비밀번호 형식 검증
-        // 영문, 숫자, 특수문자 포함 여부 검사
         if (!newPassword.matches(".*[a-zA-Z].*") ||
                 !newPassword.matches(".*[0-9].*") ||
                 !newPassword.matches(".*[!@#$%^&*].*")) {

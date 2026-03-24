@@ -110,6 +110,7 @@ public class MemberDAOImpl implements MemberDAO {
 
         return result;
     }
+
     @Override
     public boolean existsByMemberId(int memberId) {
 
@@ -156,6 +157,7 @@ public class MemberDAOImpl implements MemberDAO {
 
     @Override
     public int deleteWishlistsByMemberId(int memberId) {
+
         // 삭제된 행 개수 저장
         int result = 0;
 
