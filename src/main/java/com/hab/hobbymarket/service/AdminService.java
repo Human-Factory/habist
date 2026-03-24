@@ -2,6 +2,8 @@ package com.hab.hobbymarket.service;
 
 import com.hab.hobbymarket.dao.AdminDAO;
 import com.hab.hobbymarket.model.Member;
+import com.hab.hobbymarket.model.Notice;
+
 import java.util.List;
 
 public class AdminService {
@@ -33,7 +35,13 @@ public class AdminService {
         return adminDAO.updateMemberStatus(memberId, status);
     }
 
+    // 공지사항 전체 조회
+    public List<Notice> getAllNotices() {
+        return adminDAO.findAllNotices();
+    }
+
     // 3. 공지사항 등록
+
     public boolean createNotice(String title, String content) {
 
         // title: 공지 제목

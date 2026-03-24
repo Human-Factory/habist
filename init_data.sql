@@ -73,6 +73,8 @@ FROM enrollments e
          JOIN lectures l ON e.lecture_id = l.lecture_id
 WHERE e.member_id = 1;
 
-
+SELECT notice_id, title, content, created_at
+FROM notices
+ORDER BY notice_id DESC;
 
 -- WHERE member_id = ? AND status = 'ACTIVE';

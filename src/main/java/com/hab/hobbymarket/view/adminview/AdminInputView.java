@@ -13,9 +13,7 @@ public class AdminInputView {
         this.adminController = adminController;
     }
 
-    // ----------------------------------------------------
     // 1. 회원 관리 메뉴
-    // ----------------------------------------------------
     public static void showMemberManageMenu() {
 
         while (true) {
@@ -67,9 +65,7 @@ public class AdminInputView {
         }
     }
 
-    // ----------------------------------------------------
     // 2. 공지사항 메뉴
-    // ----------------------------------------------------
     public static void showNoticeMenu() {
 
         while (true) {
@@ -78,6 +74,7 @@ public class AdminInputView {
             System.out.println("1. 등록");
             System.out.println("2. 수정");
             System.out.println("3. 삭제");
+            System.out.println("4. 조회");
             System.out.println("0. 뒤로가기");
 
             String menu = sc.nextLine().trim();
@@ -114,6 +111,10 @@ public class AdminInputView {
                     adminController.removeNotice(id);
                 }
 
+                case "4" -> {
+                    adminController.showNotices();
+                }
+
                 case "0" -> {
                     return;
                 }
@@ -121,9 +122,7 @@ public class AdminInputView {
         }
     }
 
-    // ----------------------------------------------------
     // 3. Q&A 메뉴
-    // ----------------------------------------------------
     public static void showQnaMenu() {
 
         while (true) {

@@ -2,6 +2,7 @@ package com.hab.hobbymarket.view.adminview;
 
 // 회원 모델 import
 import com.hab.hobbymarket.model.Member;
+import com.hab.hobbymarket.model.Notice;
 
 import java.util.List;
 
@@ -30,6 +31,27 @@ public class AdminOutputView {
             System.out.println("역할 : " + member.getRole());
             System.out.println("상태 : " + member.getStatus());
 
+            System.out.println("--------------------------------");
+        }
+    }
+
+    // 공지사항 목록 출력
+    public static void showNoticeList(List<Notice> list) {
+
+        System.out.println("\n========== 공지사항 목록 ==========");
+
+        // 공지가 없으면 안내 문구 출력
+        if (list == null || list.isEmpty()) {
+            System.out.println("등록된 공지사항이 없습니다.");
+            return;
+        }
+
+        // 공지 하나씩 출력
+        for (Notice notice : list) {
+            System.out.println("공지번호 : " + notice.getNoticeId());
+            System.out.println("제목 : " + notice.getTitle());
+            System.out.println("내용 : " + notice.getContent());
+            System.out.println("등록일 : " + notice.getCreatedAt());
             System.out.println("--------------------------------");
         }
     }
