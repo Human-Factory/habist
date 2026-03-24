@@ -1,6 +1,7 @@
 package com.hab.hobbymarket.controller;
 
 import com.hab.hobbymarket.model.Member;
+import com.hab.hobbymarket.model.Notice;
 import com.hab.hobbymarket.service.AdminService;
 import com.hab.hobbymarket.view.adminview.AdminOutputView;
 import java.util.List;
@@ -42,13 +43,27 @@ public class AdminController {
         }
     }
 
+    // 공지사항 목록 조회
+    public void showNotices() {
+
+        // 서비스 호출
+        List<Notice> list = adminService.getAllNotices();
+
+        // 출력 뷰로 전달
+        outputView.showNoticeList(list);
+    }
+
     // 3. 공지 등록
     public void createNotice(String title, String content) {
 
         // Service 호출 → 공지 등록
         boolean result = adminService.createNotice(title, content);
 
-        System.out.println(result ? "공지 등록 완료" : "공지 등록 실패");
+        if (result) {
+            System.out.println("등록 완료");
+        }else {
+            System.out.println("등록 실패");
+        }
     }
 
     // 4. 공지 수정

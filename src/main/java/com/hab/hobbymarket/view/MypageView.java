@@ -38,8 +38,18 @@ public class MypageView {
     public void displayMyPageMenu() {
 
         while (true) {
+            // 세션이 끊기면 마이페이지 종료
+            if (!SessionManager.isLoggedIn()) {
+                return;
+            }
             // 내 정보 출력 (OutputView 역할)
             Member member = SessionManager.getCurrentUser();
+
+            // Null이면 종료
+            if (member == null) {
+                return;
+            }
+
             System.out.println(member.getNickname() + "님의 마이페이지");
 
             // 메뉴 출력 + 입력 (InputView 역할)
@@ -78,9 +88,13 @@ public class MypageView {
 
                 case "7" -> instructorController.apply(member.getMemberId());
 
-                case "8" -> memberInputView.confirmDelete();
-
-                case "0" -> { return; }
+                case "8" -> {
+                    boolean deleted = memberInputView.deleteMember();
+                    if (deleted) {
+                        return;
+                    }
+                }
+                case "0" -> {return;}
             }
         }
 

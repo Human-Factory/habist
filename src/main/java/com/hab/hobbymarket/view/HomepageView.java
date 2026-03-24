@@ -30,6 +30,11 @@ public class HomepageView {
     public void displayHomePage() {
 
         while (true) {
+
+            // 탈퇴나 로그 아웃으로 세션이 끊겼으면 홈페이지 종료
+            if (!SessionManager.isLoggedIn()) {
+                return;
+            }
             System.out.println("\n===========================");
             System.out.println("    🎯 하비스에 오신걸 환영합니다!");
             System.out.println("===========================");
