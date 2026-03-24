@@ -1,0 +1,129 @@
+package com.hab.hobbymarket.service;
+
+import com.hab.hobbymarket.dao.MemberDAO;
+import com.hab.hobbymarket.dao.MemberDAOImpl;
+import com.hab.hobbymarket.model.Member;
+import com.hab.hobbymarket.model.MemberSignUpRequest;
+
+public class MemberService {
+
+    private MemberDAO memberDAO = new MemberDAOImpl();
+
+    // 회원가입
+    public void signUp(MemberSignUpRequest request) {
+
+        // 1. 아이디 형식 검증
+        String loginId = request.getLoginId();
+
+        if (loginId.length() < 5 || loginId.length() > 20) {
+            System.out.println("아이디는 5~20자여야 합니다.");
+            return;
+        }
+
+        if (!loginId.matches("[a-zA-Z0-9]+")) {
+            System.out.println("아이디는 영문+숫자만 가능합니다.");
+            return;
+        }
+
+        // 2. 비밀번호 형식 검증
+        String password = request.getPassword();
+
+        if (password.length() <= 8) {
+            System.out.println("비밀번호는 8자 이상이어야 합니다.");
+            return;
+        }
+
+        if (!password.matches(".*[a-zA-Z].*") ||
+                !password.matches(".*[0-9].*") ||
+                !password.matches(".*[!@#$%^&*].*")) {
+            System.out.println("비밀번호 형식이 올바르지 않습니다.");
+            return;
+        }
+
+        // 3. 아이디 중복 체크
+        if (memberDAO.existsByLoginId(loginId)) {
+            System.out.println("이미 사용 중인 아이디입니다.");
+            return;
+        }
+
+        // 4. Member 객체 생성 후 저장
+        Member member = new Member(
+                request.getLoginId(),
+                request.getPassword(),
+                request.getNickname(),
+                request.getName()
+        );
+        member.setEmail(request.getEmail());
+        member.setPhone(request.getPhone());
+
+        boolean saved = memberDAO.save(member);
+        if (saved) {
+            System.out.println("회원가입 성공!");
+        } else {
+            System.out.println("회원가입 실패! 다시 시도해주세요.");
+        }
+    }
+
+    // 회원 탈퇴
+    public boolean deleteMember(int memberId) {
+
+        // 1. 회원 존재 여부 확인
+        boolean exists = memberDAO.existsByMemberId(memberId);
+
+        // 존재하지 않는 회원이면 바로 실패
+        if (!exists) {
+            return false;
+        }
+
+        // 2. 회원과 연결된 자식 데이터 먼저 삭제
+        memberDAO.deleteWishlistsByMemberId(memberId);
+        memberDAO.deleteEnrollmentsByMemberId(memberId);
+        memberDAO.deleteSubscriptionsByMemberId(memberId);
+
+        // 3. 마지막으로 회원 정보 삭제
+        int result = memberDAO.deleteMembersByMemberId(memberId);
+
+        // 4. members 삭제 성공 여부 반환
+        return result > 0;
+    }
+
+    // 비밀번호 재설정
+    public boolean resetPassword(String loginId, String name, String newPassword) {
+
+        // 1. 아이디 빈값 체크
+        if (loginId == null || loginId.trim().isEmpty()) {
+            System.out.println("아이디를 입력해주세요.");
+            return false;
+        }
+
+        // 2. 이름 빈값 체크
+        if (name == null || name.trim().isEmpty()) {
+            System.out.println("이름을 입력해주세요.");
+            return false;
+        }
+
+        // 3. 새 비밀번호 형식 검증
+        if (newPassword == null || newPassword.length() < 8) {
+            System.out.println("비밀번호는 8자 이상이어야 합니다.");
+            return false;
+        }
+
+        // 4. 비밀번호 형식 검증
+        // 영문, 숫자, 특수문자 포함 여부 검사
+        if (!newPassword.matches(".*[a-zA-Z].*") ||
+                !newPassword.matches(".*[0-9].*") ||
+                !newPassword.matches(".*[!@#$%^&*].*")) {
+            System.out.println("비밀번호는 영문, 숫자, 특수문자를 포함해야 합니다.");
+            return false;
+        }
+
+        // 5. DAO 호출하여 실제 DB 비밀번호 변경
+        return memberDAO.updatePassword(loginId, name, newPassword);
+    }
+
+    public Long findMemberIdByNickname(String nickname) {
+        // DB나 리스트에서 닉네임이 일치하는 Member를 찾아 ID를 반환
+        // 없으면 null이나 -1을 반환
+        return memberDAO.findByNickname(nickname).getMemberId();
+    }
+}

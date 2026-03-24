@@ -1,10 +1,14 @@
 package com.hab.hobbymarket.view;
 
+import com.hab.hobbymarket.model.Member;
+import com.hab.hobbymarket.session.SessionManager;
+import com.hab.hobbymarket.view.adminview.AdminInputView;
 import com.hab.hobbymarket.view.enrollmentview.EnrollmentInputView;
 import com.hab.hobbymarket.view.memberview.MemberInputView;
 import com.hab.hobbymarket.view.subscriptionview.SubscriptionInputView;
 import com.hab.hobbymarket.view.wishlistview.WishlistInputView;
 import java.util.Scanner;
+import com.hab.global.utils.ScannerUtil;
 
 public class MainMenuInputView {
 
@@ -13,18 +17,21 @@ public class MainMenuInputView {
     private SubscriptionInputView subscriptionInputView;
     private WishlistInputView wishlistInputView;
     private LoginView loginView;
-    private Scanner sc = new Scanner(System.in);
+    private HomepageView homepageView;
+    private Scanner sc = ScannerUtil.getInstance();
 
     public MainMenuInputView(MemberInputView memberInputView,
                              EnrollmentInputView enrollmentInputView,
                              SubscriptionInputView subscriptionInputView,
                              WishlistInputView wishlistInputView,
-                             LoginView loginView) {
+                             LoginView loginView,
+                             HomepageView homepageView) {
         this.memberInputView = memberInputView;
         this.enrollmentInputView = enrollmentInputView;
         this.subscriptionInputView = subscriptionInputView;
         this.wishlistInputView = wishlistInputView;
         this.loginView = loginView;
+        this.homepageView = homepageView;
     }
 
     public void displayMainMenu() {
@@ -34,6 +41,7 @@ public class MainMenuInputView {
             System.out.println("===========================");
             System.out.println("1. 로그인");
             System.out.println("2. 회원가입");
+            System.out.println("3. 비밀번호를 잃어버렸어요");
             System.out.println("0. 종료");
             System.out.println("===========================");
             System.out.print("메뉴를 선택해주세요 : ");
@@ -41,11 +49,27 @@ public class MainMenuInputView {
             String no = sc.nextLine().trim();
 
             switch (no) {
-                case "1" -> loginView.login();
-                case "2" -> {
-                    memberInputView.getSignUpInput();
-                    loginView.login();
+                case "1" -> {
+                    boolean isLoggedIn = loginView.login();
+                    if (SessionManager.getCurrentUser().getRole().equals(Member.ROLE_ADMIN)) {
+
+                        System.out.println("관리자 페이지로 이동합니다.");
+                        homepageView.displayAdminMenu();
+
+                    } else {
+
+                        System.out.println("메인 페이지로 이동합니다.");
+                        homepageView.displayHomePage();   // 네 메서드 이름 맞춰서 수정
+                    }
+
                 }
+
+                case "2" ->
+                    memberInputView.signUp();
+
+                case "3" ->
+                    memberInputView.getPasswordResetInput();
+
                 case "0" -> {
                     System.out.println("프로그램을 종료합니다.");
                     return;
@@ -54,4 +78,5 @@ public class MainMenuInputView {
             }
         }
     }
+
 }

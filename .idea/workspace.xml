@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="af4cd7e2-aa3b-4d1e-a50a-dd16d72de921" name="변경" comment="로그인,회원가입 기능 구현" />
+    <list default="true" id="af4cd7e2-aa3b-4d1e-a50a-dd16d72de921" name="변경" comment="로그인,회원가입 기능 구현">
+      <change beforePath="$PROJECT_DIR$/.github/.idea/.github.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/모듈1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/26__3__19___4_18__________.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/26__3__19__오후_4_18,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/26__3__23___12_05__________.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/26__3__23__오후_12_05,_병합_전에_커밋되지_않은_변경_내용_[변경]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/변경/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hab/hobbymarket/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hab/hobbymarket/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hab/hobbymarket/view/MainMenuInputView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hab/hobbymarket/view/MainMenuInputView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db.properties" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +31,31 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="habis" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="habis" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -43,12 +82,12 @@
   <component name="GithubDefaultAccount">
     <option name="defaultAccountId" value="3bacc719-cac4-48c2-b52a-59d6f86df449" />
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Human-Factory/habist.git",
-    "accountId": "3bacc719-cac4-48c2-b52a-59d6f86df449"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Human-Factory/habist.git&quot;,
+    &quot;accountId&quot;: &quot;3bacc719-cac4-48c2-b52a-59d6f86df449&quot;
   }
-}]]></component>
+}</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
@@ -76,7 +115,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main 병합 중",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
