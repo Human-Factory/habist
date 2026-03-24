@@ -48,9 +48,26 @@ public class MemberInputView {
     }
 
     public boolean confirmDelete() {
+
         Scanner sc = ScannerUtil.getInstance();
-        System.out.print("정말 탈퇴하시겠습니까? (Y/N): ");
-        return sc.nextLine().equalsIgnoreCase("Y");
+        System.out.println("정말 탈퇴하시겠습니까?");
+        System.out.println("1. 예");
+        System.out.println("2. 아니오");
+        System.out.print("선택: ");
+
+        String input = sc.nextLine().trim();
+
+        return "1".equals(input);
+    }
+    public boolean deleteMember() {
+        // 여기서만 탈퇴 여부 확인
+        if (!confirmDelete()) {
+            System.out.println("회원 탈퇴를 취소했습니다.");
+            return false;
+        }
+
+        // 확인되면 Controller에 실제 삭제 요청
+        return memberController.deleteMember();
     }
 
     // 비밀번호 재설정
