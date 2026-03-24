@@ -120,4 +120,10 @@ public class MemberService {
         // 5. DAO 호출하여 실제 DB 비밀번호 변경
         return memberDAO.updatePassword(loginId, name, newPassword);
     }
+
+    public Long findMemberIdByNickname(String nickname) {
+        // DB나 리스트에서 닉네임이 일치하는 Member를 찾아 ID를 반환
+        // 없으면 null이나 -1을 반환
+        return memberDAO.findByNickname(nickname).getMemberId();
+    }
 }

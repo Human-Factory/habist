@@ -3,6 +3,7 @@ package com.hab.hobbymarket;
 import com.hab.global.config.DBConnection;
 import com.hab.hobbymarket.controller.*;
 import com.hab.hobbymarket.dao.AdminDAO;
+import com.hab.hobbymarket.dao.MessageDAO;
 import com.hab.hobbymarket.service.*;
 import com.hab.hobbymarket.view.HomepageView;
 import com.hab.hobbymarket.view.LoginView;
@@ -13,6 +14,8 @@ import com.hab.hobbymarket.view.contentview.ContentInputView;
 import com.hab.hobbymarket.view.enrollmentview.EnrollmentInputView;
 import com.hab.hobbymarket.view.inquiryview.InquiryInputView;
 import com.hab.hobbymarket.view.memberview.MemberInputView;
+import com.hab.hobbymarket.view.messageview.MessageInputView;
+import com.hab.hobbymarket.view.messageview.MessageOutputView;
 import com.hab.hobbymarket.view.myinformationview.MyInfomationInputView;
 import com.hab.hobbymarket.view.subscriptionview.SubscriptionInputView;
 import com.hab.hobbymarket.view.wishlistview.WishlistInputView;
@@ -105,6 +108,23 @@ public class Application {
             AdminController adminController = new AdminController(adminService);
             AdminInputView adminInputView = new AdminInputView(adminController);
 
+            // ============================================================
+            // 1. 기초 부품 생성 (Service, InputView, OutputView)
+            // ============================================================
+            MessageService messageService = new MessageService(); // DAO 등을 인자로 받을 수 있음
+            MessageInputView messageInputView = new MessageInputView();
+            MessageOutputView messageOutputView = new MessageOutputView();
+
+            // ============================================================
+            // 2. 중간 관리자 생성 (Controller)
+            // ============================================================
+            // Controller는 일을 시킬 대상(Input, Output)과 로직(Service)을 모두 가집니다.
+            MessageController messageController = new MessageController(
+                    messageService,
+                    messageInputView,
+                    messageOutputView);
+
+
 
             // ============================================================
             // 12. 마이페이지 조립
@@ -115,7 +135,9 @@ public class Application {
                     instructorController,
                     enrollmentInputView,
                     memberInputView,
-                    inquiryInputView);
+                    inquiryInputView,
+                    subscriptionInputView,
+                    messageController);
 
             // ============================================================
             // 13. 홈페이지 조립
