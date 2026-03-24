@@ -84,10 +84,13 @@ public class LoginView {
 
             if (result == LoginResult.INVALID_CREDENTIAL) {
                 System.out.println("아이디 또는 비밀번호가 잘못되었습니다.");
+                return false;
             } else if (result == LoginResult.LOCKED) {
                 System.out.println("계정이 잠겨 있습니다. 잠시 후 다시 시도하세요.");
+                return false;
             } else if (result == LoginResult.INACTIVE) {
                 System.out.println("비활성화된 계정입니다.");
+                return false;
             }
         }
     }
