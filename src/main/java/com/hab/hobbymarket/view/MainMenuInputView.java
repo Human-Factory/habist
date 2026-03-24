@@ -51,6 +51,9 @@ public class MainMenuInputView {
             switch (no) {
                 case "1" -> {
                     boolean isLoggedIn = loginView.login();
+                    if (!isLoggedIn){
+                        break;
+                    }
                     if (SessionManager.getCurrentUser().getRole().equals(Member.ROLE_ADMIN)) {
 
                         System.out.println("관리자 페이지로 이동합니다.");
