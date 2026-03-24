@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import com.hab.global.config.DBConnection;
+import com.hab.hobbymarket.model.Notice;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
     public class AdminDAO {
@@ -74,14 +76,67 @@ import java.sql.ResultSet;
             }
         }
 
+        // 공지 전체 조회
+        public List<Notice> findAllNotices() {
+
+            // 조회 결과를 담을 리스트
+            List<Notice> list = new ArrayList<>();
+
+            // 공지사항 전체 조회 SQL
+            String sql = """
+            SELECT notice_id, title, content, created_at
+            FROM notices
+            ORDER BY notice_id DESC
+            """;
+
+            PreparedStatement pstmt = null;
+            ResultSet rs = null;
+
+            try {
+                // SQL 준비
+                pstmt = con.prepareStatement(sql);
+
+                // 실행
+                rs = pstmt.executeQuery();
+
+                // 조회 결과를 Notice 객체로 변환
+                while (rs.next()) {
+                    Notice notice = new Notice(
+                            rs.getInt("notice_id"),
+                            rs.getString("title"),
+                            rs.getString("content"),
+                            rs.getTimestamp("created_at")
+                    );
+                    // 리스트에 추가
+                    list.add(notice);
+                }
+
+            } catch (Exception e) {
+                System.out.println("공지 조회 실패: " + e.getMessage());
+            } finally {
+                DBConnection.close(rs, pstmt);
+            }
+
+            return list;
+        }
+
         // 공지 등록
         public boolean insertNotice(String title, String content) {
+
+            // 공지사항 INSERT 쿼리
             String sql = "INSERT INTO notices (title, content) VALUES (?, ?)";
 
             try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+                // 첫 번째 ? → 제목
                 pstmt.setString(1, title);
+
+                // 두 번째 ? → 내용
                 pstmt.setString(2, content);
+
+                // 실행 → 성공하면 true 반환
                 return pstmt.executeUpdate() > 0;
+
             } catch (Exception e) {
                 System.out.println("공지 등록 실패: " + e.getMessage());
                 return false;
